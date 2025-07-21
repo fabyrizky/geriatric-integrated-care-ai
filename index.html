@@ -2,33 +2,46 @@
   
   
   
-    :root{
-      --p:#00796b;
-      --s:#f5f5f5;
-      --t:#333;
-      --a:#ffd54f;
-      --fs:1.2rem;
+  
+    body {
+      background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
+      font-family: 'Poppins', sans-serif;
     }
-    html{font-size:var(--fs)}
-    body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--s);color:var(--t)}
-    header{background:var(--p);color:#fff;padding:1.5rem 1rem;text-align:center}
-    button{cursor:pointer;border:none;padding:.6rem 1.2rem;border-radius:4px;font-weight:bold}
-    .btn-pri{background:var(--a);color:var(--t)}
-    .btn-sec{background:var(--p);color:#fff;margin:.2rem}
-    .big-font{--fs:1.6rem}
-    main{max-width:900px;margin:2rem auto;padding:0 1rem}
-    .card{background:#fff;border-radius:8px;padding:1.2rem;margin:1rem 0;box-shadow:0 2px 6px rgba(0,0,0,.1)}
-    .hidden{display:none}
-    .float{position:fixed;bottom:1rem;right:1rem;z-index:10}
-    footer{text-align:center;padding:1rem;font-size:.8rem;color:#555}
-    .ai-section{background:#e8f5e9;padding:1rem;border-radius:8px}
-    input, select{padding:.5rem;border:1px solid #ccc;border-radius:4px;width:100%;margin:.5rem 0}
+    .gradient-text {
+      background: linear-gradient(45deg, #00796b, #ffd54f);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.9);
+      backdrop-filter: blur(5px);
+      border-radius: 15px;
+    }
+    .btn-pri {
+      background: linear-gradient(45deg, #00796b, #004d40);
+      transition: transform 0.3s ease;
+    }
+    .btn-pri:hover {
+      transform: scale(1.05);
+    }
+    .float {
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+      transition: transform 0.3s ease;
+    }
+    .float:hover {
+      transform: translateY(-5px);
+    }
+    .ai-section {
+      background: #e8f5e9;
+      border-left: 4px solid #00796b;
+    }
   
 
 
 
   GeriatriCare – RSUD Pasar Rebo
-  Layanan geriatri holistik dengan analisis kesehatan AI
+  Layanan geriatri holistik dengan analisis AI modern
   Aa+
 
 
@@ -37,84 +50,84 @@
   
     Apa itu GeriatriCare?
     
-      GeriatriCare adalah platform layanan terpadu untuk lansia, dengan analisis kesehatan berbasis AI, rekomendasi keputusan alternatif, klinik edukasi, registrasi cepat, kunjungan rumah, dan aplikasi reminder obat & konsultasi daring.
+      GeriatriCare adalah platform layanan terpadu untuk lansia, dengan analisis kesehatan berbasis AI, rekomendasi cerdas, klinik edukasi, registrasi cepat, kunjungan rumah, dan aplikasi reminder obat & konsultasi daring.
     
     
-      🔊 Dengarkan Penjelasan
+      🔊 Dengarkan
     
   
 
   
   
     Analisis Kesehatan AI
-    Masukkan data kesehatan untuk analisis risiko dan rekomendasi perawatan.
+    Masukkan data untuk analisis risiko dan rekomendasi perawatan cerdas.
     
-      Usia:
       
-      Kondisi Kesehatan:
+        Usia:
+        
       
-        Pilih kondisi
-        Hipertensi
-        Diabetes
-        Penyakit Jantung
-        Tidak ada
       
-      Tingkat Aktivitas:
+        Kondisi Kesehatan:
+        
+          Pilih kondisi
+          Hipertensi
+          Diabetes
+          Penyakit Jantung
+          Tidak ada
+        
       
-        Pilih tingkat
-        Rendah
-        Sedang
-        Tinggi
       
-      Analisis Sekarang
+        Tingkat Aktivitas:
+        
+          Pilih tingkat
+          Rendah
+          Sedang
+          Tinggi
+        
+      
     
+    Analisis Sekarang
     
   
 
   
   
     7 Inovasi Utama
-
-<div class="card">
-  <h3>1. Tim Geriatri Terpadu</h3>
-  <p>Dokter, perawat geriatri, fisioterapis & pekerja sosial dengan analisis AI.</p>
-</div>
-
-<div class="card">
-  <h3>2. Klinik Edukasi Digital (KELD)</h3>
-  <p>Video pendek 15 menit via WhatsApp & YouTube dengan rekomendasi AI.</p>
-  <a href="https://wa.me/628111222333?text=Daftar KELD" class="btn-sec">Daftar via WA</a>
-</div>
-
-<div class="card">
-  <h3>3. Registrasi Cepat Lansia</h3>
-  <p>Antrian prioritas – waktu tunggu 34→12 jam dengan alokasi AI.</p>
-  <button class="btn-pri" onclick="alert('Silakan datang ke loket khusus lansia di lobi utama.')">Petunjuk Loket</button>
-</div>
-
-<div class="card">
-  <h3>4. Kunjungan Rumah Risiko Tinggi</h3>
-  <p>Tim berkunjung ke rumah pasien post-rawat inap berdasarkan skor risiko AI.</p>
-  <a href="tel:02187777777" class="btn-sec">📞 Hubungi Tim</a>
-</div>
-
-<div class="card">
-  <h3>5. Aplikasi “GeriatriCare”</h3>
-  <p>Reminder obat, skrining jatuh, chat dokter, dan analisis kesehatan AI.</p>
-  <button class="btn-sec" onclick="installPrompt()">Install Aplikasi (PWA)</button>
-</div>
-
-<div class="card">
-  <h3>6. Senam Lansia Terintegrasi</h3>
-  <p>Senam ringan 2× seminggu di halaman RSUD, dipersonalisasi via AI.</p>
-  <button class="btn-pri" onclick="speakText(null,'Senam diadakan setiap Selasa dan Jumat pukul 07.00 WIB di halaman utama RSUD.')">🔊 Info Jadwal</button>
-</div>
-
-<div class="card">
-  <h3>7. Ruang Tunggu Ramah Lansia</h3>
-  <p>Kursi empuk, pencahayaan hangat, lantai anti-slip, dirancang untuk kenyamanan.</p>
-</div>
-
+    
+      
+        1. Tim Geriatri Terpadu
+        Dokter, perawat geriatri, fisioterapis & pekerja sosial dengan analisis AI.
+      
+      
+        2. Klinik Edukasi Digital (KELD)
+        Video pendek 15 menit via WhatsApp & YouTube dengan rekomendasi AI.
+        Daftar via WA
+      
+      
+        3. Registrasi Cepat Lansia
+        Antrian prioritas – waktu tunggu 34→12 jam dengan alokasi AI.
+        Petunjuk Loket
+      
+      
+        4. Kunjungan Rumah Risiko Tinggi
+        Tim berkunjung berdasarkan skor risiko AI post-rawat inap.
+        📞 Hubungi Tim
+      
+      
+        5. Aplikasi “GeriatriCare”
+        Reminder obat, skrining jatuh, chat dokter, analisis AI.
+        Install Aplikasi (PWA)
+      
+      
+        6. Senam Lansia Terintegrasi
+        Senam ringan 2× seminggu, dipersonalisasi via AI.
+        🔊 Info Jadwal
+      
+      
+        7. Ruang Tunggu Ramah Lansia
+        Kursi empuk, pencahayaan hangat, lantai anti-slip, desain nyaman.
+      
+    
   
 
 
@@ -125,11 +138,13 @@
 
 📞
 
+
+
 // --- Font-size toggle
 const fontBtn = document.getElementById('fontToggle');
 let big = false;
 fontBtn.onclick = () => {
-  document.documentElement.classList.toggle('big-font');
+  document.documentElement.classList.toggle('text-xl');
   fontBtn.textContent = big ? 'Aa+' : 'Aa-';
   big = !big;
 };
@@ -142,7 +157,7 @@ function speakText(id, text=''){
   speechSynthesis.speak(msg);
 }
 
-// --- Auto speak intro on first visit
+// --- Auto speak intro
 if(!localStorage.getItem('spoken')){
   window.addEventListener('load', ()=>setTimeout(()=>{
     speakText('introText');
@@ -161,7 +176,7 @@ function installPrompt(){
     deferredPrompt.prompt();
     deferredPrompt.userChoice.then(()=>deferredPrompt=null);
   } else {
-    alert('Browser Anda belum mendukung instalasi otomatis. Tambahkan ke layar utama secara manual.');
+    alert('Browser Anda belum mendukung instalasi otomatis.');
   }
 }
 
@@ -180,7 +195,6 @@ function analyzeHealth(){
   let riskScore = 0;
   let recommendations = [];
 
-  // Simple AI logic for risk scoring
   if(age > 75) riskScore += 30;
   else if(age > 65) riskScore += 15;
 
@@ -191,30 +205,28 @@ function analyzeHealth(){
   if(activity === 'low') riskScore += 20;
   else if(activity === 'medium') riskScore += 10;
 
-  // Decision support recommendations
   if(riskScore > 50){
-    recommendations.push('Prioritaskan kunjungan rumah oleh tim geriatri.');
-    recommendations.push('Lakukan skrining jatuh mingguan via aplikasi.');
-    recommendations.push('Konsultasi dokter spesialis melalui chat daring.');
+    recommendations.push('Prioritaskan kunjungan rumah.');
+    recommendations.push('Skrining jatuh mingguan.');
+    recommendations.push('Konsultasi dokter daring.');
   } else if(riskScore > 30){
-    recommendations.push('Ikuti senam lansia 2x seminggu.');
-    recommendations.push('Gunakan reminder obat di aplikasi GeriatriCare.');
-    recommendations.push('Pantau tekanan darah rutin.');
+    recommendations.push('Ikuti senam lansia.');
+    recommendations.push('Gunakan reminder obat.');
+    recommendations.push('Pantau tekanan darah.');
   } else {
-    recommendations.push('Pertahankan aktivitas fisik ringan.');
-    recommendations.push('Ikuti Klinik Edukasi Digital (KELD).');
-    recommendations.push('Jadwalkan pemeriksaan tahunan.');
+    recommendations.push('Pertahankan aktivitas ringan.');
+    recommendations.push('Ikuti Klinik Edukasi.');
+    recommendations.push('Pemeriksaan tahunan.');
   }
 
-  // Display results
   resultDiv.classList.remove('hidden');
   resultDiv.innerHTML = `
-    <strong>Hasil Analisis:</strong><br>
-    Skor Risiko: ${riskScore}%<br>
+    <strong class="text-teal-700">Hasil Analisis:</strong><br>
+    Skor Risiko: <span class="text-teal-600">${riskScore}%</span><br>
     Rekomendasi:<br>
-    <ul>
-      ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+    <ul class="list-disc pl-5">
+      ${recommendations.map(rec => `<li class="text-gray-700">${rec}</li>`).join('')}
     </ul>
-    <button class="btn-sec" onclick="speakText(null,'${recommendations.join('. ')}')">🔊 Dengarkan Rekomendasi</button>
+    <button class="btn-sec mt-2 px-4 py-2 rounded-lg" onclick="speakText(null,'${recommendations.join('. ')}')">🔊 Dengarkan</button>
   `;
 }
