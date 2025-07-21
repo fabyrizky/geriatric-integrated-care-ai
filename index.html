@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" class="scroll-smooth">
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GeriatriCare 5.1 – RSUD Pasar Rebo</title>
+  <title>GeriatriCare 6.0 – RSUD Pasar Rebo</title>
 
   <!-- PWA -->
   <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22GeriatriCare%22,%22short_name%22:%22GeriatriCare%22,%22display%22:%22standalone%22,%22background_color%22:%22#ffffff%22,%22theme_color%22:%22#00796b%22,%22start_url%22:%22/%22}"/>
@@ -12,76 +12,73 @@
   <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
-    tailwind.config = { darkMode:'class', theme:{extend:{animation:{'fade-in':'fadeIn 0.5s ease-in-out',},keyframes:{fadeIn:{'0%':{opacity:0,transform:'translateY(10px)'},'100%':{opacity:1,transform:'translateY(0)'}}}}} }
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { poppins: ['Poppins', 'sans-serif'] } } }
+    }
   </script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 
-  <!-- Chart.js -->
+  <!-- Chart -->
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
   <style>
-    body{font-family:Poppins,sans-serif;}
-    .glass{
-      background:rgba(255,255,255,.15);
-      backdrop-filter:blur(14px) saturate(180%);
-      border:1px solid rgba(255,255,255,.2);
-    }
-    .dark .glass{
-      background:rgba(0,0,0,.25);
-      border:1px solid rgba(255,255,255,.05);
-    }
+    body { font-family: Poppins, sans-serif; }
+    .glass { background: rgba(255, 255, 255, .15); backdrop-filter: blur(12px) saturate(180%); border: 1px solid rgba(255, 255, 255, .2); }
+    .dark .glass { background: rgba(0, 0, 0, .25); border: 1px solid rgba(255, 255, 255, .05); }
   </style>
 </head>
 
 <body class="bg-gradient-to-br from-cyan-100 via-green-100 to-yellow-50 dark:from-gray-900 dark:to-black transition-colors duration-500">
+
 <!-- HEADER -->
-<header class="sticky top-0 z-40 glass shadow-lg">
-  <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+<header class="sticky top-0 z-40 glass shadow-xl">
+  <div class="max-w-5xl mx-auto px-4 py-4 flex items-center justify-between">
     <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-teal-500 via-green-400 to-yellow-400 bg-clip-text text-transparent">
-      GeriatriCare 5.1
+      GeriatriCare 6.0
     </h1>
     <div class="flex items-center space-x-3">
-      <button id="fontToggle" class="text-teal-600 dark:text-yellow-300 text-lg font-bold" aria-label="Perbesar huruf">Aa+</button>
-      <button id="themeToggle" class="text-teal-600 dark:text-yellow-300 text-xl" aria-label="Tema gelap/terang">🌙</button>
+      <button id="fontToggle" class="text-teal-600 dark:text-yellow-300 text-lg font-bold" aria-label="Ukuran huruf">Aa+</button>
+      <button id="themeToggle" class="text-teal-600 dark:text-yellow-300 text-xl" aria-label="Tema">🌙</button>
     </div>
   </div>
 </header>
 
 <!-- HERO -->
-<section class="max-w-5xl mx-auto px-4 py-12 text-center animate-fade-in">
+<section class="max-w-5xl mx-auto px-4 py-12 text-center animate-pulse-once">
   <h2 class="text-4xl md:text-6xl font-extrabold mb-4">
     <span class="bg-gradient-to-r from-teal-600 via-green-500 to-yellow-400 bg-clip-text text-transparent">
       AI-Powered Geriatrics Care
     </span>
   </h2>
-  <p class="text-lg text-gray-700 dark:text-gray-200 mb-8">
+  <p class="text-lg text-gray-700 dark:text-gray-300 mb-6">
     Kesehatan lansia, kini dengan asisten AI natural & visualisasi interaktif berwarna-warni.
   </p>
-  <button onclick="openChat()" class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white px-8 py-3 rounded-full shadow-2xl hover:scale-110 transition-transform duration-300">
+  <button onclick="openChat()" class="bg-gradient-to-r from-pink-500 via-red-500 to-yellow-500 text-white px-8 py-3 rounded-full shadow-2xl hover:scale-110 transition-transform">
     💬 Buka AI Assistant
   </button>
 </section>
 
 <!-- AI HEALTH SCANNER -->
-<section id="scanner" class="max-w-2xl mx-auto px-4 mb-10 animate-fade-in">
+<section id="scanner" class="max-w-2xl mx-auto px-4 mb-10">
   <div class="glass rounded-2xl p-6 shadow-2xl">
     <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-yellow-300">🔍 AI Health Scanner</h3>
     <form onsubmit="event.preventDefault(); runScanner();" class="space-y-4">
-      <input id="age" type="number" min="50" max="120" placeholder="Usia" required class="w-full p-3 rounded-lg border dark:bg-gray-700 dark:text-white"/>
-      <select id="condition" required class="w-full p-3 rounded-lg border dark:bg-gray-700 dark:text-white">
+      <input id="age" type="number" min="50" max="120" placeholder="Usia" required class="w-full p-3 rounded-lg border dark:bg-gray-700"/>
+      <select id="condition" required class="w-full p-3 rounded-lg border dark:bg-gray-700">
         <option value="">Pilih kondisi</option>
         <option value="hypertension">Hipertensi</option>
         <option value="diabetes">Diabetes</option>
         <option value="heart">Jantung</option>
         <option value="none">Tidak ada</option>
       </select>
-      <select id="activity" required class="w-full p-3 rounded-lg border dark:bg-gray-700 dark:text-white">
+      <select id="activity" required class="w-full p-3 rounded-lg border dark:bg-gray-700">
         <option value="">Aktivitas</option>
         <option value="low">Rendah</option>
         <option value="medium">Sedang</option>
         <option value="high">Tinggi</option>
       </select>
-      <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-green-500 text-white py-3 rounded-full shadow-lg hover:scale-105 transition-transform">
+      <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-green-500 text-white py-3 rounded-full shadow-lg hover:scale-105 transition">
         Analisis Sekarang
       </button>
     </form>
@@ -89,19 +86,35 @@
   </div>
 </section>
 
-<!-- CHAT WIDGET -->
+<!-- FEATURE CARDS (rainbow) -->
+<section class="max-w-5xl mx-auto px-4 mb-10 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <!-- 7 colored cards -->
+  ${[...Array(7)].map((_,i)=>`
+    <div class="glass rounded-xl p-4 shadow-lg hover:shadow-2xl hover:-translate-y-2 transition-all">
+      <h3 class="font-bold text-lg mb-2">${['Tim Terpadu','KELD','Registrasi Kilat','Kunjungan Rumah','App PWA','Senam AI','Ruang Nyaman'][i]}</h3>
+      <p class="text-sm text-gray-600 dark:text-gray-300">Deskripsi singkat layanan.</p>
+    </div>
+  `).join('')}
+</section>
+
+<!-- AI CHAT WIDGET -->
 <div id="chatWidget" class="fixed inset-0 bg-black/40 backdrop-blur-sm z-50 hidden items-center justify-center">
-  <div class="w-11/12 max-w-lg h-[80vh] glass rounded-2xl shadow-2xl flex flex-col overflow-hidden">
-    <header class="px-4 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white flex justify-between items-center">
-      <span>💬 AI Assistant (Qwen-32B)</span>
+  <div class="w-11/12 max-w-lg h-[80vh] max-h-[600px] glass rounded-2xl shadow-2xl flex flex-col">
+    <header class="px-4 py-3 bg-gradient-to-r from-pink-500 to-red-500 text-white rounded-t-2xl flex justify-between items-center">
+      <span>💬 AI Assistant</span>
       <button onclick="closeChat()" class="text-xl">✕</button>
     </header>
-    <div id="chatBody" class="flex-1 p-3 space-y-2 overflow-y-auto"></div>
+    <div id="chatBody" class="flex-1 p-3 space-y-2 overflow-y-auto text-sm"></div>
     <footer class="p-2">
       <input id="chatInput" type="text" placeholder="Ketik pertanyaan..." class="w-full p-3 rounded-lg border dark:bg-gray-700"/>
     </footer>
   </div>
 </div>
+
+<!-- FOOTER -->
+<footer class="text-center py-6 text-sm text-gray-600 dark:text-gray-400">
+  © 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif
+</footer>
 
 <!-- SCRIPT -->
 <script>
@@ -109,7 +122,7 @@
 const html=document.documentElement;
 const fontBtn=document.getElementById('fontToggle');
 let big=false;
-fontBtn.onclick=()=>{big=!big;html.classList.toggle('text-xl',big);fontBtn.textContent=big?'Aa-':'Aa+'};
+fontBtn.onclick=()=>{big=!big;html.classList.toggle('text-lg',big);fontBtn.textContent=big?'Aa-':'Aa+'};
 const themeBtn=document.getElementById('themeToggle');
 themeBtn.onclick=()=>{
   html.classList.toggle('dark');
@@ -118,7 +131,7 @@ themeBtn.onclick=()=>{
 };
 if(localStorage.getItem('theme')==='dark'){html.classList.add('dark');themeBtn.innerHTML='☀️'}
 
-/* --- Scanner with chart */
+/* --- Scanner */
 function runScanner(){
   const age=+document.getElementById('age').value;
   const cond=document.getElementById('condition').value;
@@ -128,7 +141,7 @@ function runScanner(){
   if(age>75) score+=30; else if(age>65) score+=15;
   score+=cond!=='none'?25:0;
   score+=act==='low'?20:act==='medium'?10:0;
-  const colors=score>50?['#e53e3e','#38a169']:score>30?['#ed8936','#38a169']:['#48bb78','#38a169'];
+  const colors=score>50?['#ef4444','#34d399']:score>30?['#f97316','#34d399']:['#22c55e','#34d399'];
   const canvas=document.createElement('canvas');
   canvas.id='riskChart';canvas.className='w-full h-48';
   const div=document.getElementById('scanResult');
@@ -158,7 +171,7 @@ async function askAI(prompt){
     const res=await fetch('https://free-ai-proxy.vercel.app/api/qwen',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({prompt})});
     const data=await res.json();
     return data.reply||'Maaf, saya tidak paham.';
-  }catch{return'Server sibuk, coba lagi sebentar.'}
+  }catch{return'Server sibuk, coba lagi.'}
 }
 function appendChat(sender,text){
   const div=document.createElement('div');
