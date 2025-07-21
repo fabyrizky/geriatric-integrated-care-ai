@@ -1,16 +1,12 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GeriatriCare – RSUD Pasar Rebo</title>
-  <meta name="description" content="Platform layanan geriatri terpadu untuk lansia dan keluarga"/>
-  <link rel="manifest" href="data:application/manifest+json,{
-    \"name\":\"GeriatriCare\",\"short_name\":\"GeriatriCare\",\"display\":\"standalone\",\"background_color\":\"#ffffff\",\"theme_color\":\"#00796b\",\"start_url\":\"/\",\"icons\":[
-      {\"src\":\"data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTkyIDE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTQ0IDg4YTI0IDI0IDAgMSAwIDAgNDggMjQgMjQgMCAwIDAgMC00OHptLTQ4IDBhMjQgMjQgMCAxIDAgMCA0OCAyNCAyNCAwIDAgMCAwLTQ4em0tNDggMGEyNCAyNCAwIDEgMCAwIDQ4IDI0IDI0IDAgMCAwIDAtNDh6IiBmaWxsPSIjMDA3OTZiIi8+PC9zdmc+\",\"sizes\":\"192x192\",\"type\":\"image/svg+xml\"}
-    ]
-  }"/>
-  <style>
+
+
+
+  
+  
+  GeriatriCare – RSUD Pasar Rebo
+  
+  
+  
     :root{
       --p:#00796b;
       --s:#f5f5f5;
@@ -30,84 +26,110 @@
     .hidden{display:none}
     .float{position:fixed;bottom:1rem;right:1rem;z-index:10}
     footer{text-align:center;padding:1rem;font-size:.8rem;color:#555}
-  </style>
-</head>
-<body>
-<header>
-  <h1>GeriatriCare – RSUD Pasar Rebo</h1>
-  <p>Layanan geriatri holistik, cepat, dan ramah lansia</p>
-  <button id="fontToggle" class="btn-sec" aria-label="Perbesar huruf">Aa+</button>
-</header>
+    .ai-section{background:#e8f5e9;padding:1rem;border-radius:8px}
+    input, select{padding:.5rem;border:1px solid #ccc;border-radius:4px;width:100%;margin:.5rem 0}
+  
 
-<main>
-  <!-- INTRO -->
-  <section id="intro" class="card">
-    <h2>Apa itu GeriatriCare?</h2>
-    <p id="introText">
-      GeriatriCare adalah paket layanan terpadu yang meliputi
-      klinik edukasi, registrasi super cepat, kunjungan rumah,
-      serta aplikasi reminder obat & konsultasi daring – semua
-      dirancang khusus untuk lansia dan keluarga.
-    </p>
-    <button class="btn-pri" onclick="speakText('introText')">
+
+
+  GeriatriCare – RSUD Pasar Rebo
+  Layanan geriatri holistik dengan analisis kesehatan AI
+  Aa+
+
+
+
+  
+  
+    Apa itu GeriatriCare?
+    
+      GeriatriCare adalah platform layanan terpadu untuk lansia, dengan analisis kesehatan berbasis AI, rekomendasi keputusan alternatif, klinik edukasi, registrasi cepat, kunjungan rumah, dan aplikasi reminder obat & konsultasi daring.
+    
+    
       🔊 Dengarkan Penjelasan
-    </button>
-  </section>
+    
+  
 
-  <!-- FITUR -->
-  <section id="features">
-    <h2>7 Inovasi Utama</h2>
+  
+  
+    Analisis Kesehatan AI
+    Masukkan data kesehatan untuk analisis risiko dan rekomendasi perawatan.
+    
+      Usia:
+      
+      Kondisi Kesehatan:
+      
+        Pilih kondisi
+        Hipertensi
+        Diabetes
+        Penyakit Jantung
+        Tidak ada
+      
+      Tingkat Aktivitas:
+      
+        Pilih tingkat
+        Rendah
+        Sedang
+        Tinggi
+      
+      Analisis Sekarang
+    
+    
+  
 
-    <div class="card">
-      <h3>1. Tim Geriatri Terpadu</h3>
-      <p>Dokter, perawat geriatri, fisioterapis & pekerja sosial satu tim.</p>
-    </div>
+  
+  
+    7 Inovasi Utama
 
-    <div class="card">
-      <h3>2. Klinik Edukasi Digital (KELD)</h3>
-      <p>Video pendek 15 menit via WhatsApp & YouTube.</p>
-      <a href="https://wa.me/628111222333?text=Daftar KELD" class="btn-sec">Daftar via WA</a>
-    </div>
+<div class="card">
+  <h3>1. Tim Geriatri Terpadu</h3>
+  <p>Dokter, perawat geriatri, fisioterapis & pekerja sosial dengan analisis AI.</p>
+</div>
 
-    <div class="card">
-      <h3>3. Registrasi Cepat Lansia</h3>
-      <p>Antrian prioritas – waktu tunggu 34→12 jam.</p>
-      <button class="btn-pri" onclick="alert('Silakan datang ke loket khusus lansia di lobi utama.')">Petunjuk Loket</button>
-    </div>
+<div class="card">
+  <h3>2. Klinik Edukasi Digital (KELD)</h3>
+  <p>Video pendek 15 menit via WhatsApp & YouTube dengan rekomendasi AI.</p>
+  <a href="https://wa.me/628111222333?text=Daftar KELD" class="btn-sec">Daftar via WA</a>
+</div>
 
-    <div class="card">
-      <h3>4. Kunjungan Rumah Risiko Tinggi</h3>
-      <p>Tim berkunjung ke rumah pasien post-rawat inap.</p>
-      <a href="tel:02187777777" class="btn-sec">📞 Hubungi Tim</a>
-    </div>
+<div class="card">
+  <h3>3. Registrasi Cepat Lansia</h3>
+  <p>Antrian prioritas – waktu tunggu 34→12 jam dengan alokasi AI.</p>
+  <button class="btn-pri" onclick="alert('Silakan datang ke loket khusus lansia di lobi utama.')">Petunjuk Loket</button>
+</div>
 
-    <div class="card">
-      <h3>5. Aplikasi “GeriatriCare”</h3>
-      <p>Reminder obat, skrining jatuh, chat dokter.</p>
-      <button class="btn-sec" onclick="installPrompt()">Install Aplikasi (PWA)</button>
-    </div>
+<div class="card">
+  <h3>4. Kunjungan Rumah Risiko Tinggi</h3>
+  <p>Tim berkunjung ke rumah pasien post-rawat inap berdasarkan skor risiko AI.</p>
+  <a href="tel:02187777777" class="btn-sec">📞 Hubungi Tim</a>
+</div>
 
-    <div class="card">
-      <h3>6. Senam Lansia Terintegrasi</h3>
-      <p>Senam ringan 2× seminggu di halaman RSUD.</p>
-      <button class="btn-pri" onclick="speakText(null,'Senam diadakan setiap Selasa dan Jumat pukul 07.00 WIB di halaman utama RSUD.')">🔊 Info Jadwal</button>
-    </div>
+<div class="card">
+  <h3>5. Aplikasi “GeriatriCare”</h3>
+  <p>Reminder obat, skrining jatuh, chat dokter, dan analisis kesehatan AI.</p>
+  <button class="btn-sec" onclick="installPrompt()">Install Aplikasi (PWA)</button>
+</div>
 
-    <div class="card">
-      <h3>7. Ruang Tunggu Ramah Lansia</h3>
-      <p>Kursi empuk, pencahayaan hangat, lantai anti-slip.</p>
-    </div>
-  </section>
-</main>
+<div class="card">
+  <h3>6. Senam Lansia Terintegrasi</h3>
+  <p>Senam ringan 2× seminggu di halaman RSUD, dipersonalisasi via AI.</p>
+  <button class="btn-pri" onclick="speakText(null,'Senam diadakan setiap Selasa dan Jumat pukul 07.00 WIB di halaman utama RSUD.')">🔊 Info Jadwal</button>
+</div>
 
-<footer>
+<div class="card">
+  <h3>7. Ruang Tunggu Ramah Lansia</h3>
+  <p>Kursi empuk, pencahayaan hangat, lantai anti-slip, dirancang untuk kenyamanan.</p>
+</div>
+
+  
+
+
+
   © 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif
-</footer>
 
-<!-- FAB CALL -->
-<a class="float btn-sec" href="tel:02187777777">📞</a>
 
-<script>
+
+📞
+
 // --- Font-size toggle
 const fontBtn = document.getElementById('fontToggle');
 let big = false;
@@ -133,7 +155,7 @@ if(!localStorage.getItem('spoken')){
   },800));
 }
 
-// --- PWA install prompt (only in supporting browsers)
+// --- PWA install prompt
 let deferredPrompt;
 window.addEventListener('beforeinstallprompt', e=>{
   e.preventDefault();
@@ -147,6 +169,57 @@ function installPrompt(){
     alert('Browser Anda belum mendukung instalasi otomatis. Tambahkan ke layar utama secara manual.');
   }
 }
-</script>
-</body>
-</html>
+
+// --- AI Health Analysis
+function analyzeHealth(){
+  const age = parseInt(document.getElementById('age').value);
+  const condition = document.getElementById('condition').value;
+  const activity = document.getElementById('activity').value;
+  const resultDiv = document.getElementById('aiResult');
+
+  if(!age || !condition || !activity){
+    alert('Harap lengkapi semua field.');
+    return;
+  }
+
+  let riskScore = 0;
+  let recommendations = [];
+
+  // Simple AI logic for risk scoring
+  if(age > 75) riskScore += 30;
+  else if(age > 65) riskScore += 15;
+
+  if(condition === 'hypertension') riskScore += 20;
+  else if(condition === 'diabetes') riskScore += 25;
+  else if(condition === 'heart') riskScore += 30;
+
+  if(activity === 'low') riskScore += 20;
+  else if(activity === 'medium') riskScore += 10;
+
+  // Decision support recommendations
+  if(riskScore > 50){
+    recommendations.push('Prioritaskan kunjungan rumah oleh tim geriatri.');
+    recommendations.push('Lakukan skrining jatuh mingguan via aplikasi.');
+    recommendations.push('Konsultasi dokter spesialis melalui chat daring.');
+  } else if(riskScore > 30){
+    recommendations.push('Ikuti senam lansia 2x seminggu.');
+    recommendations.push('Gunakan reminder obat di aplikasi GeriatriCare.');
+    recommendations.push('Pantau tekanan darah rutin.');
+  } else {
+    recommendations.push('Pertahankan aktivitas fisik ringan.');
+    recommendations.push('Ikuti Klinik Edukasi Digital (KELD).');
+    recommendations.push('Jadwalkan pemeriksaan tahunan.');
+  }
+
+  // Display results
+  resultDiv.classList.remove('hidden');
+  resultDiv.innerHTML = `
+    <strong>Hasil Analisis:</strong><br>
+    Skor Risiko: ${riskScore}%<br>
+    Rekomendasi:<br>
+    <ul>
+      ${recommendations.map(rec => `<li>${rec}</li>`).join('')}
+    </ul>
+    <button class="btn-sec" onclick="speakText(null,'${recommendations.join('. ')}')">🔊 Dengarkan Rekomendasi</button>
+  `;
+}
