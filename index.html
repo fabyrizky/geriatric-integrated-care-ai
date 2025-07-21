@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inovasi Layanan Geriatri – RSUD Pasar Rebo</title>
+  <style>
+    :root {
+      --primary: #00796b;
+      --secondary: #f5f5f5;
+      --text: #333;
+      --accent: #ffd54f;
+    }
+    body {
+      margin: 0;
+      font-family: "Segoe UI", Arial, sans-serif;
+      background: var(--secondary);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--primary);
+      color: #fff;
+      padding: 1.5rem 1rem;
+      text-align: center;
+    }
+    main {
+      max-width: 900px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+    }
+    h2 {
+      color: var(--primary);
+    }
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1.2rem;
+      margin: 1rem 0;
+      box-shadow: 0 2px 6px rgba(0,0,0,.1);
+    }
+    button {
+      background: var(--accent);
+      border: none;
+      padding: .6rem 1.2rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    footer {
+      text-align: center;
+      padding: 1rem;
+      font-size: .8rem;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Inovasi Layanan Geriatri RSUD Pasar Rebo</h1>
+    <p>Menuju pelayanan holistik lansia yang ramah, cepat, dan terintegrasi.</p>
+  </header>
+
+  <main>
+    <section id="intro">
+      <h2>Apa itu GeriatriCare?</h2>
+      <p>
+        GeriatriCare adalah paket inovasi layanan kesehatan bagi lanjut usia yang terdiri atas
+        <strong>klinik edukasi, fast-track registration, kunjungan rumah, dan geriatri terpadu</strong>
+        dalam satu platform digital.
+      </p>
+      <button onclick="scrollToSection('features')">Lihat Fitur</button>
+    </section>
+
+    <section id="features">
+      <h2>7 Inovasi Utama</h2>
+
+      <div class="card">
+        <h3>1. Tim Geriatri Terpadu</h3>
+        <p>Dokter, perawat geriatri, fisioterapis & pekerja sosial bekerja sama satu atap.</p>
+      </div>
+
+      <div class="card">
+        <h3>2. Klinik Edukasi Digital (KELD)</h3>
+        <p>Webinar & konten edukatif 15 menit via WhatsApp & YouTube singkat.</p>
+      </div>
+
+      <div class="card">
+        <h3>3. Registrasi Cepat Lansia</h3>
+        <p>Antrian prioritas + gelang identifikasi, waktu tunggu 34→12 jam.</p>
+      </div>
+
+      <div class="card">
+        <h3>4. Kunjungan Rumah Risiko Tinggi</h3>
+        <p>Tim berkunjung ke rumah pasien post-rawat inap atau frailty.</p>
+      </div>
+
+      <div class="card">
+        <h3>5. Aplikasi “GeriatriCare”</h3>
+        <p>Reminder obat, skrining jatuh, & chat konsultasi daring.</p>
+      </div>
+
+      <div class="card">
+        <h3>6. Senam Lansia Terintegrasi</h3>
+        <p>2× seminggu di halaman RSUD + edukasi 15 menit pasca senam.</p>
+      </div>
+
+      <div class="card">
+        <h3>7. Ruang Tunggu Ramah Lansia</h3>
+        <p>Kursi ergonomis, pencahayaan hangat, lantai anti-slip, & loket prioritas.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif
+  </footer>
+
+  <script>
+    // Smooth scroll helper
+    function scrollToSection(id) {
+      document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+</html>
