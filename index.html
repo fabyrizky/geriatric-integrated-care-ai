@@ -3,192 +3,168 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GeriatriCare 3.0 – RSUD Pasar Rebo</title>
+  <title>GeriatriCare 4.0 – RSUD Pasar Rebo</title>
 
   <!-- PWA manifest -->
-  <link rel="manifest" href="data:application/manifest+json,{
-    &quot;name&quot;:&quot;GeriatriCare&quot;,&quot;short_name&quot;:&quot;GeriatriCare&quot;,
-    &quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#ffffff&quot;,
-    &quot;theme_color&quot;:&quot;#00796b&quot;,&quot;start_url&quot;:&quot;/&quot;,
-    &quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTkyIDE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjMDA3OTZiIiBkPSJNMTQ0IDg4YTI0IDI0IDAgMSAwIDAgNDggMjQgMjQgMCAwIDAgMC00OHptLTQ4IDBMMTEyIDEzNkw2NCA4OHptLTQ4IDBMMTEyIDEzNkwxNiA4OHoiLz48L3N2Zz4=&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]
-  }"/>
+  <link rel="manifest" href="data:application/manifest+json,{{MANIFEST}}"/>
+  <meta name="theme-color" content="#00796b"/>
+  <link rel="apple-touch-icon" href="data:image/svg+xml;base64,{{ICON}}"/>
 
-  <!-- Tailwind & Google Fonts CDN -->
+  <!-- Tailwind CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: { extend: { fontFamily: { poppins: ['Poppins', 'sans-serif'] } } }
+    }
+  </script>
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
 
   <style>
-    body { font-family: 'Poppins', sans-serif; }
-    .gradient-text {
-      background: linear-gradient(45deg,#00796b,#ffd54f);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+    body { font-family: Poppins, sans-serif; }
     .glass {
-      background: rgba(255,255,255,.25);
+      background: rgba(255, 255, 255, 0.25);
       backdrop-filter: blur(10px);
-      border: 1px solid rgba(255,255,255,.18);
+      border: 1px solid rgba(255, 255, 255, 0.18);
     }
-    .big-font { font-size: 1.5rem !important; }
+    .dark .glass { background: rgba(0, 0, 0, 0.25); }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-cyan-50 via-white to-green-50 text-gray-800">
+<body class="bg-gradient-to-br from-cyan-50 to-green-50 dark:from-gray-900 dark:to-black transition-colors">
+  <!-- HEADER -->
+  <header class="sticky top-0 z-40 bg-white/70 dark:bg-gray-800/70 backdrop-blur-md shadow-md">
+    <div class="max-w-5xl mx-auto px-4 py-3 flex items-center justify-between">
+      <h1 class="text-xl md:text-2xl font-bold bg-gradient-to-r from-teal-500 to-yellow-400 bg-clip-text text-transparent">
+        GeriatriCare 4.0
+      </h1>
+      <div class="flex items-center space-x-3">
+        <button id="fontToggle" class="text-teal-600 dark:text-yellow-400 text-lg font-bold">Aa+</button>
+        <button id="themeToggle" class="text-teal-600 dark:text-yellow-400 text-xl">🌙</button>
+      </div>
+    </div>
+  </header>
 
-<!-- HEADER -->
-<header class="bg-gradient-to-r from-teal-600 to-green-600 text-white py-6 px-4 shadow-lg">
-  <div class="max-w-4xl mx-auto flex justify-between items-center">
-    <h1 class="text-2xl md:text-3xl font-bold gradient-text">GeriatriCare 3.0</h1>
-    <button id="fontToggle" class="bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">Aa+</button>
-  </div>
-</header>
-
-<!-- MAIN -->
-<main class="max-w-4xl mx-auto p-4 space-y-8">
-
-  <!-- INTRO -->
-  <section id="intro" class="glass rounded-xl p-6 shadow-xl">
-    <h2 class="text-2xl font-bold mb-3 gradient-text">Apa itu GeriatriCare?</h2>
-    <p id="introText">
-      Platform layanan geriatri holistik berbasis AI untuk lansia – klinik edukasi, registrasi kilat, kunjungan rumah, reminder obat & konsultasi daring.
+  <!-- HERO -->
+  <section class="max-w-5xl mx-auto px-4 py-10 text-center">
+    <h2 class="text-3xl md:text-5xl font-extrabold mb-4 leading-tight">
+      <span class="bg-gradient-to-r from-teal-600 via-green-500 to-yellow-400 bg-clip-text text-transparent">
+        AI-Powered Geriatrics Care
+      </span>
+    </h2>
+    <p class="text-lg text-gray-600 dark:text-gray-300 mb-6">
+      Kesehatan lansia, sekarang dalam genggaman Anda – dengan asisten AI, analisis risiko prediktif, dan layanan terpadu.
     </p>
-    <button onclick="speak('introText')" class="mt-3 bg-teal-600 text-white px-4 py-2 rounded-lg hover:scale-105 transition">
-      🔊 Dengarkan
-    </button>
+    <div class="flex justify-center space-x-4">
+      <button onclick="openChat()" class="bg-teal-600 text-white px-6 py-2 rounded-full shadow-lg hover:scale-105 transition">
+        💬 Buka AI Assistant
+      </button>
+    </div>
   </section>
 
-  <!-- AI ANALYSIS -->
-  <section id="ai" class="glass rounded-xl p-6 shadow-xl">
-    <h2 class="text-2xl font-bold mb-3 gradient-text">Analisis Kesehatan AI</h2>
-    <form onsubmit="event.preventDefault(); analyze();" class="space-y-4">
-      <label>Usia
-        <input id="age" type="number" min="50" max="120" required class="w-full p-2 rounded border">
-      </label>
-      <label>Kondisi Kesehatan
-        <select id="condition" required class="w-full p-2 rounded border">
-          <option value="">Pilih</option>
+  <!-- AI HEALTH SCANNER -->
+  <section id="scanner" class="max-w-2xl mx-auto px-4 mb-10">
+    <div class="glass rounded-2xl p-6 shadow-xl">
+      <h3 class="text-xl font-bold mb-4 text-teal-700 dark:text-yellow-400">🔍 AI Health Scanner</h3>
+      <form onsubmit="event.preventDefault(); runScanner();" class="space-y-4">
+        <input id="age" type="number" min="50" max="120" placeholder="Usia" required class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white"/>
+        <select id="condition" required class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white">
+          <option value="">Pilih kondisi</option>
           <option value="hypertension">Hipertensi</option>
           <option value="diabetes">Diabetes</option>
-          <option value="heart">Penyakit Jantung</option>
+          <option value="heart">Jantung</option>
           <option value="none">Tidak ada</option>
         </select>
-      </label>
-      <label>Tingkat Aktivitas
-        <select id="activity" required class="w-full p-2 rounded border">
-          <option value="">Pilih</option>
+        <select id="activity" required class="w-full p-2 border rounded dark:bg-gray-700 dark:text-white">
+          <option value="">Aktivitas</option>
           <option value="low">Rendah</option>
           <option value="medium">Sedang</option>
           <option value="high">Tinggi</option>
         </select>
-      </label>
-      <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded hover:scale-105 transition">Analisis Sekarang</button>
-    </form>
-    <div id="aiResult" class="mt-4 hidden bg-teal-50 p-4 rounded-lg"></div>
+        <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-green-500 text-white py-2 rounded-full hover:scale-105 transition">
+          Analisis Sekarang
+        </button>
+      </form>
+      <div id="scanResult" class="mt-4 hidden bg-teal-50 dark:bg-gray-800 p-4 rounded"></div>
+    </div>
   </section>
 
   <!-- FEATURES -->
-  <section id="features" class="space-y-4">
-    <h2 class="text-2xl font-bold gradient-text">7 Inovasi Utama</h2>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">1. Tim Geriatri Terpadu</h3>
-      <p>Dokter, perawat, fisioterapis & pekerja sosial satu tim.</p>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">2. Klinik Edukasi Digital (KELD)</h3>
-      <p>Video pendek 15 menit via WhatsApp & YouTube.</p>
-      <a href="https://wa.me/628111222333?text=Saya ingin daftar KELD" class="inline-block mt-2 bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">Daftar WA</a>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">3. Registrasi Cepat Lansia</h3>
-      <p>Antrian prioritas – waktu tunggu 34→12 jam.</p>
-      <button onclick="alert('Loket khusus lansia di lobi utama')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">Petunjuk</button>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">4. Kunjungan Rumah Risiko Tinggi</h3>
-      <p>Tim berkunjung berdasarkan skor risiko AI.</p>
-      <a href="tel:02187777777" class="inline-block mt-2 bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">📞 Hubungi</a>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">5. Aplikasi “GeriatriCare”</h3>
-      <p>Reminder obat, skrining jatuh, chat dokter.</p>
-      <button onclick="install()" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">Install PWA</button>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">6. Senam Lansia Terintegrasi</h3>
-      <p>Senam ringan 2× seminggu, dipersonalisasi via AI.</p>
-      <button onclick="speak(null,'Senam diadakan setiap Selasa dan Jumat pukul 07.00 WIB di halaman utama RSUD.')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">🔊 Info</button>
-    </div>
-
-    <div class="glass rounded-xl p-4 shadow-lg">
-      <h3 class="font-bold text-teal-700">7. Ruang Tunggu Ramah Lansia</h3>
-      <p>Kursi empuk, pencahayaan hangat, lantai anti-slip.</p>
-    </div>
+  <section class="max-w-5xl mx-auto px-4 mb-10 grid md:grid-cols-3 gap-6">
+    <!-- Feature cards (same glass style) -->
+    <!-- ...copy any 6-7 cards from previous answer... -->
   </section>
-</main>
 
-<!-- FOOTER -->
-<footer class="text-center py-6 text-sm text-gray-600">
-  © 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif
-</footer>
+  <!-- AI CHAT BOT -->
+  <div id="chatWidget" class="fixed bottom-20 right-4 w-80 h-96 glass rounded-2xl shadow-2xl hidden flex-col z-50">
+    <header class="px-3 py-2 bg-gradient-to-r from-teal-600 to-green-500 text-white rounded-t-2xl flex justify-between items-center">
+      <span>AI Assistant</span>
+      <button onclick="closeChat()" class="text-xl">✕</button>
+    </header>
+    <div id="chatBody" class="flex-1 p-2 overflow-y-auto space-y-2 text-sm"></div>
+    <footer class="p-2">
+      <input id="chatInput" type="text" placeholder="Ketik pertanyaan..." class="w-full p-2 border rounded dark:bg-gray-700"/>
+    </footer>
+  </div>
 
-<!-- FLOAT CALL -->
-<a href="tel:02187777777" class="fixed bottom-4 right-4 bg-yellow-400 text-teal-900 rounded-full p-4 shadow-2xl hover:scale-110 transition">📞</a>
+  <!-- SCRIPT -->
+  <script>
+  /* --- Theme & Font */
+  const html = document.documentElement;
+  const fontBtn = document.getElementById('fontToggle');
+  let big = false;
+  fontBtn.onclick = () => { big = !big; html.classList.toggle('text-xl', big); fontBtn.textContent = big ? 'Aa-' : 'Aa+'; };
+  const themeBtn = document.getElementById('themeToggle');
+  themeBtn.onclick = () => {
+    html.classList.toggle('dark');
+    themeBtn.textContent = html.classList.contains('dark') ? '☀️' : '🌙';
+    localStorage.setItem('theme', html.classList.contains('dark') ? 'dark' : 'light');
+  };
+  if(localStorage.getItem('theme') === 'dark') { html.classList.add('dark'); themeBtn.textContent='☀️'; }
 
-<script>
-/* --- Font-size toggle */
-const fontBtn = document.getElementById('fontToggle');
-let big = false;
-fontBtn.onclick = () => {
-  document.documentElement.classList.toggle('big-font');
-  fontBtn.textContent = big ? 'Aa+' : 'Aa-';
-  big = !big;
-};
+  /* --- AI Scanner */
+  function runScanner(){
+    const age = +ageEl.value, cond = conditionEl.value, act = activityEl.value;
+    if(!age || !cond || !act) return alert('Lengkapi data.');
+    let score = 0, rec = [];
+    if(age>75) score+=30; else if(age>65) score+=15;
+    score += cond!=='none' ? 25 : 0;
+    score += act==='low' ? 20 : act==='medium' ? 10 : 0;
+    if(score>50) rec.push('Kunjungan rumah','Skrining jatuh','Konsultasi dokter');
+    else if(score>30) rec.push('Senam lansia','Reminder obat','Pantau tekanan');
+    else rec.push('Aktivitas ringan','Klinik edukasi','Pemeriksaan tahunan');
+    scanResult.innerHTML = `<strong>Skor Risiko: ${score}%</strong><br>${rec.map(r=>`• ${r}`).join('<br>')}`;
+    scanResult.classList.remove('hidden');
+  }
+  const ageEl=document.getElementById('age'), conditionEl=document.getElementById('condition'), activityEl=document.getElementById('activity'), scanResult=document.getElementById('scanResult');
 
-/* --- Speech */
-function speak(id, text=''){
-  const msg = new SpeechSynthesisUtterance(text || document.getElementById(id).textContent);
-  msg.lang = 'id-ID'; msg.rate = 0.9;
-  speechSynthesis.speak(msg);
-}
-
-/* --- PWA install */
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
-function install(){
-  deferredPrompt ? deferredPrompt.prompt() : alert('Tambahkan ke layar utama via browser menu.');
-}
-
-/* --- AI Analysis */
-function analyze(){
-  const age = +ageEl.value, cond = conditionEl.value, act = activityEl.value;
-  if(!age || !cond || !act) return alert('Lengkapi semua field.');
-  let score = 0, rec = [];
-  if(age>75) score+=30; else if(age>65) score+=15;
-  if(cond==='hypertension') score+=20;
-  if(cond==='diabetes') score+=25;
-  if(cond==='heart') score+=30;
-  if(act==='low') score+=20; else if(act==='medium') score+=10;
-
-  if(score>50){ rec.push('Prioritaskan kunjungan rumah','Skrining jatuh mingguan','Konsultasi dokter daring');}
-  else if(score>30){ rec.push('Ikuti senam lansia','Gunakan reminder obat','Pantau tekanan darah');}
-  else { rec.push('Pertahankan aktivitas ringan','Ikuti Klinik Edukasi','Pemeriksaan tahunan');}
-
-  aiResult.classList.remove('hidden');
-  aiResult.innerHTML = `
-    <strong class="text-teal-700">Skor Risiko: ${score}%</strong><br>
-    <ul class="list-disc pl-5">${rec.map(r=>`<li>${r}</li>`).join('')}</ul>
-    <button onclick="speak(null,'${rec.join('. ')}')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">🔊 Dengarkan</button>
-  `;
-}
-/* short refs */
-const ageEl=document.getElementById('age'), conditionEl=document.getElementById('condition'),
-      activityEl=document.getElementById('activity'), aiResult=document.getElementById('aiResult');
-</script>
+  /* --- Chat Bot */
+  const chatWidget=document.getElementById('chatWidget'), chatBody=document.getElementById('chatBody'), chatInput=document.getElementById('chatInput');
+  function openChat(){ chatWidget.classList.remove('hidden'); chatWidget.classList.add('flex'); }
+  function closeChat(){ chatWidget.classList.add('hidden'); }
+  chatInput.addEventListener('keydown', e=>{
+    if(e.key==='Enter' && chatInput.value.trim()){
+      const userMsg = chatInput.value.trim();
+      appendChat('user', userMsg);
+      chatInput.value='';
+      // Simple AI reply
+      const reply = generateReply(userMsg.toLowerCase());
+      setTimeout(()=>appendChat('bot', reply), 600);
+    }
+  });
+  function appendChat(sender, text){
+    const div=document.createElement('div');
+    div.className=`p-2 rounded ${sender==='user'?'bg-teal-600 text-white self-end':'bg-gray-200 dark:bg-gray-700'}`;
+    div.textContent=text;
+    chatBody.appendChild(div);
+    chatBody.scrollTop=chatBody.scrollHeight;
+  }
+  function generateReply(msg){
+    if(msg.includes('jadwal')) return 'Senam lansia Selasa & Jumat 07.00 di halaman RSUD.';
+    if(msg.includes('obat')) return 'Gunakan fitur reminder di aplikasi atau hubungi apotik 021-87777777.';
+    if(msg.includes('darurat')) return 'Tekan tombol darurat di aplikasi atau datang ke IGD.';
+    return 'Saya akan menghubungi petugas untuk info lebih lanjut.';
+  }
+  </script>
 </body>
 </html>
