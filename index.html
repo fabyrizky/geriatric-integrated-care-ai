@@ -1,232 +1,194 @@
-    GeriatriCare – RSUD Pasar Rebo
-  
-  
-  
-  
-    body {
-      background: linear-gradient(135deg, #e0f7fa 0%, #ffffff 100%);
-      font-family: 'Poppins', sans-serif;
-    }
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>GeriatriCare 3.0 – RSUD Pasar Rebo</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="data:application/manifest+json,{
+    &quot;name&quot;:&quot;GeriatriCare&quot;,&quot;short_name&quot;:&quot;GeriatriCare&quot;,
+    &quot;display&quot;:&quot;standalone&quot;,&quot;background_color&quot;:&quot;#ffffff&quot;,
+    &quot;theme_color&quot;:&quot;#00796b&quot;,&quot;start_url&quot;:&quot;/&quot;,
+    &quot;icons&quot;:[{&quot;src&quot;:&quot;data:image/svg+xml;base64,PHN2ZyB2aWV3Qm94PSIwIDAgMTkyIDE5MiIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBmaWxsPSIjMDA3OTZiIiBkPSJNMTQ0IDg4YTI0IDI0IDAgMSAwIDAgNDggMjQgMjQgMCAwIDAgMC00OHptLTQ4IDBMMTEyIDEzNkw2NCA4OHptLTQ4IDBMMTEyIDEzNkwxNiA4OHoiLz48L3N2Zz4=&quot;,&quot;sizes&quot;:&quot;192x192&quot;,&quot;type&quot;:&quot;image/svg+xml&quot;}]
+  }"/>
+
+  <!-- Tailwind & Google Fonts CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet"/>
+
+  <style>
+    body { font-family: 'Poppins', sans-serif; }
     .gradient-text {
-      background: linear-gradient(45deg, #00796b, #ffd54f);
+      background: linear-gradient(45deg,#00796b,#ffd54f);
       -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
+      -webkit-text-fill-color: transparent;
     }
-    .card {
-      background: rgba(255, 255, 255, 0.9);
-      backdrop-filter: blur(5px);
-      border-radius: 15px;
+    .glass {
+      background: rgba(255,255,255,.25);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255,255,255,.18);
     }
-    .btn-pri {
-      background: linear-gradient(45deg, #00796b, #004d40);
-      transition: transform 0.3s ease;
-    }
-    .btn-pri:hover {
-      transform: scale(1.05);
-    }
-    .float {
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
-      transition: transform 0.3s ease;
-    }
-    .float:hover {
-      transform: translateY(-5px);
-    }
-    .ai-section {
-      background: #e8f5e9;
-      border-left: 4px solid #00796b;
-    }
-  
+    .big-font { font-size: 1.5rem !important; }
+  </style>
+</head>
 
+<body class="bg-gradient-to-br from-cyan-50 via-white to-green-50 text-gray-800">
 
+<!-- HEADER -->
+<header class="bg-gradient-to-r from-teal-600 to-green-600 text-white py-6 px-4 shadow-lg">
+  <div class="max-w-4xl mx-auto flex justify-between items-center">
+    <h1 class="text-2xl md:text-3xl font-bold gradient-text">GeriatriCare 3.0</h1>
+    <button id="fontToggle" class="bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">Aa+</button>
+  </div>
+</header>
 
-  GeriatriCare – RSUD Pasar Rebo
-  Layanan geriatri holistik dengan analisis AI modern
-  Aa+
+<!-- MAIN -->
+<main class="max-w-4xl mx-auto p-4 space-y-8">
 
-
-
-  
-  
-    Apa itu GeriatriCare?
-    
-      GeriatriCare adalah platform layanan terpadu untuk lansia, dengan analisis kesehatan berbasis AI, rekomendasi cerdas, klinik edukasi, registrasi cepat, kunjungan rumah, dan aplikasi reminder obat & konsultasi daring.
-    
-    
+  <!-- INTRO -->
+  <section id="intro" class="glass rounded-xl p-6 shadow-xl">
+    <h2 class="text-2xl font-bold mb-3 gradient-text">Apa itu GeriatriCare?</h2>
+    <p id="introText">
+      Platform layanan geriatri holistik berbasis AI untuk lansia – klinik edukasi, registrasi kilat, kunjungan rumah, reminder obat & konsultasi daring.
+    </p>
+    <button onclick="speak('introText')" class="mt-3 bg-teal-600 text-white px-4 py-2 rounded-lg hover:scale-105 transition">
       🔊 Dengarkan
-    
-  
+    </button>
+  </section>
 
-  
-  
-    Analisis Kesehatan AI
-    Masukkan data untuk analisis risiko dan rekomendasi perawatan cerdas.
-    
-      
-        Usia:
-        
-      
-      
-        Kondisi Kesehatan:
-        
-          Pilih kondisi
-          Hipertensi
-          Diabetes
-          Penyakit Jantung
-          Tidak ada
-        
-      
-      
-        Tingkat Aktivitas:
-        
-          Pilih tingkat
-          Rendah
-          Sedang
-          Tinggi
-        
-      
-    
-    Analisis Sekarang
-    
-  
+  <!-- AI ANALYSIS -->
+  <section id="ai" class="glass rounded-xl p-6 shadow-xl">
+    <h2 class="text-2xl font-bold mb-3 gradient-text">Analisis Kesehatan AI</h2>
+    <form onsubmit="event.preventDefault(); analyze();" class="space-y-4">
+      <label>Usia
+        <input id="age" type="number" min="50" max="120" required class="w-full p-2 rounded border">
+      </label>
+      <label>Kondisi Kesehatan
+        <select id="condition" required class="w-full p-2 rounded border">
+          <option value="">Pilih</option>
+          <option value="hypertension">Hipertensi</option>
+          <option value="diabetes">Diabetes</option>
+          <option value="heart">Penyakit Jantung</option>
+          <option value="none">Tidak ada</option>
+        </select>
+      </label>
+      <label>Tingkat Aktivitas
+        <select id="activity" required class="w-full p-2 rounded border">
+          <option value="">Pilih</option>
+          <option value="low">Rendah</option>
+          <option value="medium">Sedang</option>
+          <option value="high">Tinggi</option>
+        </select>
+      </label>
+      <button type="submit" class="bg-teal-600 text-white px-4 py-2 rounded hover:scale-105 transition">Analisis Sekarang</button>
+    </form>
+    <div id="aiResult" class="mt-4 hidden bg-teal-50 p-4 rounded-lg"></div>
+  </section>
 
-  
-  
-    7 Inovasi Utama
-    
-      
-        1. Tim Geriatri Terpadu
-        Dokter, perawat geriatri, fisioterapis & pekerja sosial dengan analisis AI.
-      
-      
-        2. Klinik Edukasi Digital (KELD)
-        Video pendek 15 menit via WhatsApp & YouTube dengan rekomendasi AI.
-        Daftar via WA
-      
-      
-        3. Registrasi Cepat Lansia
-        Antrian prioritas – waktu tunggu 34→12 jam dengan alokasi AI.
-        Petunjuk Loket
-      
-      
-        4. Kunjungan Rumah Risiko Tinggi
-        Tim berkunjung berdasarkan skor risiko AI post-rawat inap.
-        📞 Hubungi Tim
-      
-      
-        5. Aplikasi “GeriatriCare”
-        Reminder obat, skrining jatuh, chat dokter, analisis AI.
-        Install Aplikasi (PWA)
-      
-      
-        6. Senam Lansia Terintegrasi
-        Senam ringan 2× seminggu, dipersonalisasi via AI.
-        🔊 Info Jadwal
-      
-      
-        7. Ruang Tunggu Ramah Lansia
-        Kursi empuk, pencahayaan hangat, lantai anti-slip, desain nyaman.
-      
-    
-  
+  <!-- FEATURES -->
+  <section id="features" class="space-y-4">
+    <h2 class="text-2xl font-bold gradient-text">7 Inovasi Utama</h2>
 
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">1. Tim Geriatri Terpadu</h3>
+      <p>Dokter, perawat, fisioterapis & pekerja sosial satu tim.</p>
+    </div>
 
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">2. Klinik Edukasi Digital (KELD)</h3>
+      <p>Video pendek 15 menit via WhatsApp & YouTube.</p>
+      <a href="https://wa.me/628111222333?text=Saya ingin daftar KELD" class="inline-block mt-2 bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">Daftar WA</a>
+    </div>
 
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">3. Registrasi Cepat Lansia</h3>
+      <p>Antrian prioritas – waktu tunggu 34→12 jam.</p>
+      <button onclick="alert('Loket khusus lansia di lobi utama')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">Petunjuk</button>
+    </div>
+
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">4. Kunjungan Rumah Risiko Tinggi</h3>
+      <p>Tim berkunjung berdasarkan skor risiko AI.</p>
+      <a href="tel:02187777777" class="inline-block mt-2 bg-yellow-400 text-teal-900 px-3 py-1 rounded-full font-bold">📞 Hubungi</a>
+    </div>
+
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">5. Aplikasi “GeriatriCare”</h3>
+      <p>Reminder obat, skrining jatuh, chat dokter.</p>
+      <button onclick="install()" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">Install PWA</button>
+    </div>
+
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">6. Senam Lansia Terintegrasi</h3>
+      <p>Senam ringan 2× seminggu, dipersonalisasi via AI.</p>
+      <button onclick="speak(null,'Senam diadakan setiap Selasa dan Jumat pukul 07.00 WIB di halaman utama RSUD.')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">🔊 Info</button>
+    </div>
+
+    <div class="glass rounded-xl p-4 shadow-lg">
+      <h3 class="font-bold text-teal-700">7. Ruang Tunggu Ramah Lansia</h3>
+      <p>Kursi empuk, pencahayaan hangat, lantai anti-slip.</p>
+    </div>
+  </section>
+</main>
+
+<!-- FOOTER -->
+<footer class="text-center py-6 text-sm text-gray-600">
   © 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif
+</footer>
 
+<!-- FLOAT CALL -->
+<a href="tel:02187777777" class="fixed bottom-4 right-4 bg-yellow-400 text-teal-900 rounded-full p-4 shadow-2xl hover:scale-110 transition">📞</a>
 
-
-📞
-
-
-
-// --- Font-size toggle
+<script>
+/* --- Font-size toggle */
 const fontBtn = document.getElementById('fontToggle');
 let big = false;
 fontBtn.onclick = () => {
-  document.documentElement.classList.toggle('text-xl');
+  document.documentElement.classList.toggle('big-font');
   fontBtn.textContent = big ? 'Aa+' : 'Aa-';
   big = !big;
 };
 
-// --- Speech Synthesis
-function speakText(id, text=''){
+/* --- Speech */
+function speak(id, text=''){
   const msg = new SpeechSynthesisUtterance(text || document.getElementById(id).textContent);
-  msg.lang = 'id-ID';
-  msg.rate = 0.9;
+  msg.lang = 'id-ID'; msg.rate = 0.9;
   speechSynthesis.speak(msg);
 }
 
-// --- Auto speak intro
-if(!localStorage.getItem('spoken')){
-  window.addEventListener('load', ()=>setTimeout(()=>{
-    speakText('introText');
-    localStorage.setItem('spoken','1');
-  },800));
-}
-
-// --- PWA install prompt
+/* --- PWA install */
 let deferredPrompt;
-window.addEventListener('beforeinstallprompt', e=>{
-  e.preventDefault();
-  deferredPrompt = e;
-});
-function installPrompt(){
-  if(deferredPrompt){
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then(()=>deferredPrompt=null);
-  } else {
-    alert('Browser Anda belum mendukung instalasi otomatis.');
-  }
+window.addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredPrompt = e; });
+function install(){
+  deferredPrompt ? deferredPrompt.prompt() : alert('Tambahkan ke layar utama via browser menu.');
 }
 
-// --- AI Health Analysis
-function analyzeHealth(){
-  const age = parseInt(document.getElementById('age').value);
-  const condition = document.getElementById('condition').value;
-  const activity = document.getElementById('activity').value;
-  const resultDiv = document.getElementById('aiResult');
+/* --- AI Analysis */
+function analyze(){
+  const age = +ageEl.value, cond = conditionEl.value, act = activityEl.value;
+  if(!age || !cond || !act) return alert('Lengkapi semua field.');
+  let score = 0, rec = [];
+  if(age>75) score+=30; else if(age>65) score+=15;
+  if(cond==='hypertension') score+=20;
+  if(cond==='diabetes') score+=25;
+  if(cond==='heart') score+=30;
+  if(act==='low') score+=20; else if(act==='medium') score+=10;
 
-  if(!age || !condition || !activity){
-    alert('Harap lengkapi semua field.');
-    return;
-  }
+  if(score>50){ rec.push('Prioritaskan kunjungan rumah','Skrining jatuh mingguan','Konsultasi dokter daring');}
+  else if(score>30){ rec.push('Ikuti senam lansia','Gunakan reminder obat','Pantau tekanan darah');}
+  else { rec.push('Pertahankan aktivitas ringan','Ikuti Klinik Edukasi','Pemeriksaan tahunan');}
 
-  let riskScore = 0;
-  let recommendations = [];
-
-  if(age > 75) riskScore += 30;
-  else if(age > 65) riskScore += 15;
-
-  if(condition === 'hypertension') riskScore += 20;
-  else if(condition === 'diabetes') riskScore += 25;
-  else if(condition === 'heart') riskScore += 30;
-
-  if(activity === 'low') riskScore += 20;
-  else if(activity === 'medium') riskScore += 10;
-
-  if(riskScore > 50){
-    recommendations.push('Prioritaskan kunjungan rumah.');
-    recommendations.push('Skrining jatuh mingguan.');
-    recommendations.push('Konsultasi dokter daring.');
-  } else if(riskScore > 30){
-    recommendations.push('Ikuti senam lansia.');
-    recommendations.push('Gunakan reminder obat.');
-    recommendations.push('Pantau tekanan darah.');
-  } else {
-    recommendations.push('Pertahankan aktivitas ringan.');
-    recommendations.push('Ikuti Klinik Edukasi.');
-    recommendations.push('Pemeriksaan tahunan.');
-  }
-
-  resultDiv.classList.remove('hidden');
-  resultDiv.innerHTML = `
-    <strong class="text-teal-700">Hasil Analisis:</strong><br>
-    Skor Risiko: <span class="text-teal-600">${riskScore}%</span><br>
-    Rekomendasi:<br>
-    <ul class="list-disc pl-5">
-      ${recommendations.map(rec => `<li class="text-gray-700">${rec}</li>`).join('')}
-    </ul>
-    <button class="btn-sec mt-2 px-4 py-2 rounded-lg" onclick="speakText(null,'${recommendations.join('. ')}')">🔊 Dengarkan</button>
+  aiResult.classList.remove('hidden');
+  aiResult.innerHTML = `
+    <strong class="text-teal-700">Skor Risiko: ${score}%</strong><br>
+    <ul class="list-disc pl-5">${rec.map(r=>`<li>${r}</li>`).join('')}</ul>
+    <button onclick="speak(null,'${rec.join('. ')}')" class="mt-2 bg-teal-600 text-white px-3 py-1 rounded">🔊 Dengarkan</button>
   `;
 }
+/* short refs */
+const ageEl=document.getElementById('age'), conditionEl=document.getElementById('condition'),
+      activityEl=document.getElementById('activity'), aiResult=document.getElementById('aiResult');
+</script>
+</body>
+</html>
