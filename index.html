@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>GeriatriCare AI Pro – RSUD Pasar Rebo</title>
+  <title>SIGAP GeriatriCare – RSUD Pasar Rebo</title>
 
   <!-- PWA Manifest -->
-  <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22GeriatriCare%20AI%20Pro%22,%22short_name%22:%22GeriatriCare%22,%22display%22:%22standalone%22,%22background_color%22:%22#ffffff%22,%22theme_color%22:%22#00796b%22,%22start_url%22:%22/%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%2300796b'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='40'%3E🏥%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22192x192%22,%22type%22:%22image/svg+xml%22}]}"/>
+  <link rel="manifest" href="data:application/manifest+json,{%22name%22:%22SIGAP%20GeriatriCare%22,%22short_name%22:%22SIGAP%22,%22display%22:%22standalone%22,%22background_color%22:%22#ffffff%22,%22theme_color%22:%22#00796b%22,%22start_url%22:%22/%22,%22icons%22:[{%22src%22:%22data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='40' fill='%2300796b'/%3E%3Ctext x='50' y='60' text-anchor='middle' fill='white' font-size='30'%3E🏥%3C/text%3E%3C/svg%3E%22,%22sizes%22:%22192x192%22,%22type%22:%22image/svg+xml%22}]}"/>
   <meta name="theme-color" content="#00796b"/>
 
   <!-- Tailwind CDN -->
@@ -21,11 +21,6 @@
             'fade-in': 'fadeIn 0.5s ease-in-out',
             'slide-up': 'slideUp 0.6s ease-out',
             'bounce-gentle': 'bounceGentle 2s infinite',
-          },
-          keyframes: {
-            fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
-            slideUp: { '0%': { transform: 'translateY(20px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
-            bounceGentle: { '0%, 100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-5px)' } }
           }
         } 
       }
@@ -47,202 +42,360 @@
     .dark .glass { 
       background: rgba(15, 23, 42, 0.6); 
       border: 1px solid rgba(255, 255, 255, 0.1); 
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
     }
     .gradient-text {
       background: linear-gradient(135deg, #14b8a6, #10b981, #84cc16, #eab308);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
-      background-clip: text;
     }
     .chat-user { background: linear-gradient(135deg, #ec4899, #ef4444); }
     .chat-bot { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
-    .typing-indicator::after {
-      content: '...';
-      animation: blink 1.5s infinite;
-    }
-    @keyframes blink {
-      0%, 50% { opacity: 1; }
-      51%, 100% { opacity: 0; }
-    }
     .feature-card {
-      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-      background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.2));
+      transition: all 0.3s ease;
+      cursor: pointer;
     }
     .feature-card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0,0,0,0.15);
     }
+    .modal {
+      backdrop-filter: blur(8px);
+    }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+    @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+    @keyframes bounceGentle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-5px); } }
   </style>
 </head>
 
-<body class="bg-gradient-to-br from-cyan-50 via-blue-50 via-green-50 to-yellow-50 dark:from-slate-900 dark:via-gray-900 dark:to-black transition-all duration-700">
+<body class="bg-gradient-to-br from-cyan-50 via-blue-50 to-green-50 dark:from-slate-900 dark:via-gray-900 dark:to-black transition-all duration-700">
 
 <!-- HEADER -->
-<header class="sticky top-0 z-40 glass shadow-xl animate-slide-up">
+<header class="sticky top-0 z-40 glass shadow-xl">
   <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
     <div class="flex items-center space-x-3">
       <div class="text-3xl animate-bounce-gentle">🏥</div>
-      <h1 class="text-xl md:text-2xl font-bold gradient-text">
-        GeriatriCare AI Pro
-      </h1>
+      <div>
+        <h1 class="text-xl md:text-2xl font-bold gradient-text">SIGAP GeriatriCare</h1>
+        <p class="text-xs text-gray-600 dark:text-gray-400">RSUD Pasar Rebo</p>
+      </div>
     </div>
     <div class="flex items-center space-x-4">
       <div class="flex items-center space-x-2">
-        <button id="fontDecrease" class="text-teal-600 dark:text-yellow-300 text-sm font-bold px-2 py-1 rounded hover:bg-white/20" aria-label="Kecilkan huruf">A-</button>
-        <button id="fontIncrease" class="text-teal-600 dark:text-yellow-300 text-lg font-bold px-2 py-1 rounded hover:bg-white/20" aria-label="Besarkan huruf">A+</button>
+        <button id="fontDecrease" class="text-teal-600 dark:text-yellow-300 text-sm font-bold px-2 py-1 rounded hover:bg-white/20">A-</button>
+        <button id="fontIncrease" class="text-teal-600 dark:text-yellow-300 text-lg font-bold px-2 py-1 rounded hover:bg-white/20">A+</button>
       </div>
-      <button id="themeToggle" class="text-2xl hover:scale-110 transition-transform" aria-label="Ganti tema">🌙</button>
-      <button id="speechToggle" class="text-xl hover:scale-110 transition-transform" aria-label="Suara" title="Toggle Text-to-Speech">🔊</button>
+      <button id="themeToggle" class="text-2xl hover:scale-110 transition-transform">🌙</button>
+      <button id="speechToggle" class="text-xl hover:scale-110 transition-transform" title="Toggle Suara">🔊</button>
     </div>
   </div>
 </header>
 
 <!-- HERO SECTION -->
-<section class="max-w-6xl mx-auto px-4 py-12 text-center animate-fade-in">
-  <h2 class="text-4xl md:text-5xl font-extrabold mb-4 animate-slide-up">
-    <span class="gradient-text">AI-Powered Healthcare</span>
-    <br/>
-    <span class="text-gray-700 dark:text-gray-300">for Elderly Care</span>
+<section class="max-w-6xl mx-auto px-4 py-12 text-center">
+  <h2 class="text-4xl md:text-5xl font-extrabold mb-4">
+    <span class="gradient-text">Sistem Informasi Geriatri Terpadu</span>
   </h2>
-  <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 max-w-2xl mx-auto">
-    Platform kesehatan lansia dengan AI natural, visualisasi interaktif, dan layanan terintegrasi.
+  <p class="text-lg text-gray-600 dark:text-gray-300 mb-6 max-w-3xl mx-auto">
+    Platform komprehensif untuk pelayanan kesehatan lansia dengan integrasi AI, screening geriatri 14 item, dan edukasi komunitas.
   </p>
   <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-    <button onclick="openChat()" class="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-500 text-white px-6 py-3 rounded-full shadow-2xl hover:scale-105 transition-all duration-300 font-semibold">
+    <button onclick="openScreening()" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-xl hover:scale-105 transition-all font-semibold">
+      📋 Screening Geriatri
+    </button>
+    <button onclick="openChat()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-3 rounded-full shadow-xl hover:scale-105 transition-all font-semibold">
       💬 Konsultasi AI
     </button>
-    <button onclick="scrollToScanner()" class="bg-gradient-to-r from-emerald-500 to-teal-500 text-white px-6 py-3 rounded-full shadow-xl hover:scale-105 transition-all duration-300 font-semibold">
-      🔍 Health Check
+    <button onclick="openEducation()" class="bg-gradient-to-r from-orange-500 to-red-500 text-white px-6 py-3 rounded-full shadow-xl hover:scale-105 transition-all font-semibold">
+      📚 Edukasi Lansia
     </button>
   </div>
 </section>
 
-<!-- AI HEALTH SCANNER -->
-<section id="scanner" class="max-w-4xl mx-auto px-4 mb-12 animate-slide-up">
-  <div class="glass rounded-3xl p-6 shadow-2xl">
-    <div class="text-center mb-4">
-      <h3 class="text-xl font-bold gradient-text mb-2">🔍 AI Health Risk Scanner</h3>
-      <p class="text-sm text-gray-600 dark:text-gray-300">Analisis risiko kesehatan dengan AI</p>
-    </div>
-    
-    <form onsubmit="event.preventDefault(); runScanner();" class="space-y-4">
-      <div class="grid md:grid-cols-3 gap-4">
-        <div>
-          <input id="age" type="number" min="50" max="120" placeholder="Usia (tahun)" required 
-                 class="w-full p-3 rounded-xl border dark:bg-gray-700 focus:border-teal-500 transition-colors"/>
-        </div>
-        <div>
-          <select id="gender" required class="w-full p-3 rounded-xl border dark:bg-gray-700 focus:border-teal-500 transition-colors">
-            <option value="">Jenis Kelamin</option>
-            <option value="male">Laki-laki</option>
-            <option value="female">Perempuan</option>
-          </select>
-        </div>
-        <div>
-          <select id="condition" required class="w-full p-3 rounded-xl border dark:bg-gray-700 focus:border-teal-500 transition-colors">
-            <option value="">Kondisi Kesehatan</option>
-            <option value="hypertension">Hipertensi</option>
-            <option value="diabetes">Diabetes</option>
-            <option value="heart">Penyakit Jantung</option>
-            <option value="multiple">Multiple Conditions</option>
-            <option value="none">Sehat</option>
-          </select>
-        </div>
-      </div>
-      
-      <div>
-        <select id="activity" required class="w-full p-3 rounded-xl border dark:bg-gray-700 focus:border-teal-500 transition-colors">
-          <option value="">Tingkat Aktivitas Fisik</option>
-          <option value="low">Rendah (jarang olahraga)</option>
-          <option value="medium">Sedang (2-3x/minggu)</option>
-          <option value="high">Tinggi (rutin setiap hari)</option>
-        </select>
-      </div>
-      
-      <button type="submit" class="w-full bg-gradient-to-r from-teal-600 to-emerald-500 text-white py-3 rounded-xl shadow-lg hover:scale-[1.02] transition-all duration-300 font-semibold">
-        🎯 Analisis Sekarang
-      </button>
-    </form>
-    
-    <div id="scanResult" class="mt-6 hidden animate-fade-in"></div>
-  </div>
-</section>
-
-<!-- FEATURE CARDS -->
+<!-- QUICK ACCESS CARDS -->
 <section class="max-w-6xl mx-auto px-4 mb-12">
-  <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Layanan Terintegrasi</h3>
-  <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">👥</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">Tim Geriatri</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Spesialis lansia terpadu</p>
+  <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Akses Cepat SIGAP</h3>
+  <div class="grid md:grid-cols-3 gap-6">
+    <!-- Pasien Card -->
+    <div class="feature-card glass rounded-2xl p-6 text-center" onclick="openPatientAccess()">
+      <div class="text-4xl mb-4">👥</div>
+      <h4 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">Akses Pasien</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Buku Laporan Geriatri Digital</p>
+      <div class="text-xs text-gray-500">Usia 60+ tahun</div>
     </div>
     
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">🧠</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">KELD</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Evaluasi komprehensif</p>
+    <!-- Family & FKTP Card -->
+    <div class="feature-card glass rounded-2xl p-6 text-center" onclick="openFamilyAccess()">
+      <div class="text-4xl mb-4">👨‍👩‍👧‍👦</div>
+      <h4 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">Keluarga & FKTP</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Aplikasi SIGAP Mobile</p>
+      <div class="text-xs text-gray-500">Caregiver & Dokter Keluarga</div>
     </div>
     
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">⚡</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">Registrasi</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Pendaftaran cepat</p>
-    </div>
-    
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">🏠</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">Home Care</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Layanan rumah</p>
-    </div>
-    
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">📱</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">PWA</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Install aplikasi</p>
-    </div>
-    
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">🤸</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">Senam AI</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Latihan terpandu</p>
-    </div>
-    
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">🛋️</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">Ruang Nyaman</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Area istirahat</p>
-    </div>
-    
-    <div class="feature-card glass rounded-2xl p-4 text-center">
-      <div class="text-3xl mb-2">🤖</div>
-      <h4 class="font-bold mb-1 text-gray-800 dark:text-gray-200">AI Assistant</h4>
-      <p class="text-xs text-gray-600 dark:text-gray-300">Konsultasi 24/7</p>
+    <!-- Doctor Card -->
+    <div class="feature-card glass rounded-2xl p-6 text-center" onclick="openDoctorAccess()">
+      <div class="text-4xl mb-4">👨‍⚕️</div>
+      <h4 class="font-bold text-lg mb-2 text-gray-800 dark:text-gray-200">Dokter RSUD</h4>
+      <p class="text-sm text-gray-600 dark:text-gray-300 mb-4">Electronic Medical Record</p>
+      <div class="text-xs text-gray-500">Rawat Jalan Geriatri</div>
     </div>
   </div>
 </section>
 
-<!-- AI CHAT WIDGET -->
-<div id="chatWidget" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden items-center justify-center p-4">
-  <div class="w-full max-w-lg h-[80vh] max-h-[600px] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden">
-    <header class="px-4 py-3 bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 text-white flex justify-between items-center">
+<!-- POLI GERIATRI SECTION -->
+<section class="max-w-6xl mx-auto px-4 mb-12">
+  <h3 class="text-2xl font-bold text-center mb-8 gradient-text">Poli Terkait Geriatri</h3>
+  <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('jantung')">
+      <div class="text-2xl mb-2">❤️</div>
+      <h5 class="text-sm font-semibold">Jantung</h5>
+    </div>
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('dalam')">
+      <div class="text-2xl mb-2">🩺</div>
+      <h5 class="text-sm font-semibold">Peny. Dalam</h5>
+    </div>
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('saraf')">
+      <div class="text-2xl mb-2">🧠</div>
+      <h5 class="text-sm font-semibold">Saraf</h5>
+    </div>
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('ortho')">
+      <div class="text-2xl mb-2">🦴</div>
+      <h5 class="text-sm font-semibold">Orthopedi</h5>
+    </div>
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('gizi')">
+      <div class="text-2xl mb-2">🥗</div>
+      <h5 class="text-sm font-semibold">Gizi</h5>
+    </div>
+    <div class="feature-card glass rounded-xl p-4 text-center" onclick="openPoliInfo('rehab')">
+      <div class="text-2xl mb-2">🏃‍♂️</div>
+      <h5 class="text-sm font-semibold">Rehab Medik</h5>
+    </div>
+  </div>
+</section>
+
+<!-- EDUKASI KOMUNITAS -->
+<section class="max-w-6xl mx-auto px-4 mb-12">
+  <div class="glass rounded-3xl p-6">
+    <div class="text-center mb-6">
+      <h3 class="text-2xl font-bold gradient-text mb-2">📅 Klub Edukasi Lansia</h3>
+      <p class="text-gray-600 dark:text-gray-300">Setiap Jumat • Diskusi Kelompok • Media Visual</p>
+    </div>
+    
+    <div class="grid md:grid-cols-3 gap-4">
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">💊</div>
+        <h4 class="font-semibold mb-2">Farmasi</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400">"Lupa Minum Obat? Begini Solusinya"</p>
+        <button onclick="openEducationVideo('farmasi')" class="mt-2 bg-blue-500 text-white px-3 py-1 rounded-full text-xs hover:bg-blue-600">Tonton</button>
+      </div>
+      
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">🏃‍♂️</div>
+        <h4 class="font-semibold mb-2">Rehab Medik</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400">"Cegah Jatuh & Jaga Jantung"</p>
+        <button onclick="openEducationVideo('rehab')" class="mt-2 bg-green-500 text-white px-3 py-1 rounded-full text-xs hover:bg-green-600">Tonton</button>
+      </div>
+      
+      <div class="bg-white dark:bg-gray-800 rounded-xl p-4 text-center">
+        <div class="text-3xl mb-2">🩺</div>
+        <h4 class="font-semibold mb-2">Keperawatan</h4>
+        <p class="text-sm text-gray-600 dark:text-gray-400">"Hipertensi & Diabetes"</p>
+        <button onclick="openEducationVideo('keperawatan')" class="mt-2 bg-purple-500 text-white px-3 py-1 rounded-full text-xs hover:bg-purple-600">Tonton</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MODAL: SCREENING GERIATRI 14 ITEM -->
+<div id="screeningModal" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden items-center justify-center p-4 modal">
+  <div class="w-full max-w-4xl h-[90vh] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+    <header class="px-6 py-4 bg-gradient-to-r from-emerald-600 to-teal-500 text-white flex justify-between items-center">
+      <h3 class="font-bold text-lg">📋 Screening Geriatri 14 Item</h3>
+      <button onclick="closeScreening()" class="text-2xl hover:scale-110 transition-transform">✕</button>
+    </header>
+    
+    <div class="flex-1 p-6 overflow-y-auto">
+      <form id="screeningForm" class="space-y-4">
+        <!-- Identitas Pasien -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4">
+          <h4 class="font-semibold mb-3 text-teal-700 dark:text-teal-300">👤 Identitas Pasien</h4>
+          <div class="grid md:grid-cols-2 gap-4">
+            <input type="text" placeholder="Nama Lengkap" class="w-full p-3 rounded-lg border dark:bg-gray-700" required>
+            <input type="number" placeholder="Usia" min="60" max="120" class="w-full p-3 rounded-lg border dark:bg-gray-700" required>
+            <input type="text" placeholder="No. RM" class="w-full p-3 rounded-lg border dark:bg-gray-700" required>
+            <select class="w-full p-3 rounded-lg border dark:bg-gray-700" required>
+              <option value="">Jenis Kelamin</option>
+              <option value="L">Laki-laki</option>
+              <option value="P">Perempuan</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Tanda Vital -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4">
+          <h4 class="font-semibold mb-3 text-teal-700 dark:text-teal-300">🩺 Tanda Vital & Kesadaran</h4>
+          <div class="grid md:grid-cols-3 gap-4">
+            <input type="text" placeholder="Tekanan Darah (mmHg)" class="w-full p-3 rounded-lg border dark:bg-gray-700">
+            <input type="number" placeholder="Nadi (x/menit)" class="w-full p-3 rounded-lg border dark:bg-gray-700">
+            <input type="number" placeholder="Suhu (°C)" step="0.1" class="w-full p-3 rounded-lg border dark:bg-gray-700">
+            <input type="number" placeholder="Respirasi (x/menit)" class="w-full p-3 rounded-lg border dark:bg-gray-700">
+            <select class="w-full p-3 rounded-lg border dark:bg-gray-700">
+              <option value="">Kesadaran</option>
+              <option value="composmentis">Composmentis</option>
+              <option value="apatis">Apatis</option>
+              <option value="somnolen">Somnolen</option>
+              <option value="stupor">Stupor</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- 14 Item Screening Geriatri -->
+        <div class="bg-white dark:bg-gray-800 rounded-xl p-4">
+          <h4 class="font-semibold mb-3 text-teal-700 dark:text-teal-300">🔍 14 Item Screening Geriatri</h4>
+          <div class="space-y-3">
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">1. Gangguan Penglihatan</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="vision" value="0"> Tidak</label>
+                <label><input type="radio" name="vision" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">2. Gangguan Pendengaran</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="hearing" value="0"> Tidak</label>
+                <label><input type="radio" name="hearing" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">3. Gangguan Keseimbangan/Jatuh</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="balance" value="0"> Tidak</label>
+                <label><input type="radio" name="balance" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">4. Malnutrisi</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="nutrition" value="0"> Tidak</label>
+                <label><input type="radio" name="nutrition" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">5. Inkontinensia Urin</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="incontinence" value="0"> Tidak</label>
+                <label><input type="radio" name="incontinence" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">6. Depresi</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="depression" value="0"> Tidak</label>
+                <label><input type="radio" name="depression" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">7. Gangguan Kognitif</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="cognitive" value="0"> Tidak</label>
+                <label><input type="radio" name="cognitive" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">8. Polyfarmacy (>5 obat)</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="polypharmacy" value="0"> Tidak</label>
+                <label><input type="radio" name="polypharmacy" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">9. Gangguan Aktivitas Harian</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="adl" value="0"> Tidak</label>
+                <label><input type="radio" name="adl" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">10. Isolasi Sosial</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="social" value="0"> Tidak</label>
+                <label><input type="radio" name="social" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">11. Gangguan Tidur</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="sleep" value="0"> Tidak</label>
+                <label><input type="radio" name="sleep" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">12. Nyeri Kronis</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="pain" value="0"> Tidak</label>
+                <label><input type="radio" name="pain" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">13. Riwayat Hospitalisasi</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="hospitalization" value="0"> Tidak</label>
+                <label><input type="radio" name="hospitalization" value="1"> Ya</label>
+              </div>
+            </div>
+            
+            <div class="screening-item">
+              <label class="block text-sm font-medium mb-1">14. Dukungan Sosial Kurang</label>
+              <div class="flex space-x-4">
+                <label><input type="radio" name="support" value="0"> Tidak</label>
+                <label><input type="radio" name="support" value="1"> Ya</label>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <button type="submit" class="w-full bg-gradient-to-r from-emerald-600 to-teal-500 text-white py-3 rounded-xl font-semibold hover:scale-[1.02] transition-all">
+          📊 Analisis Hasil Screening
+        </button>
+      </form>
+
+      <div id="screeningResult" class="mt-6 hidden"></div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: AI CHAT -->
+<div id="chatModal" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden items-center justify-center p-4 modal">
+  <div class="w-full max-w-2xl h-[80vh] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+    <header class="px-6 py-4 bg-gradient-to-r from-purple-600 to-pink-500 text-white flex justify-between items-center">
       <div class="flex items-center space-x-2">
         <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-        <span class="font-semibold text-sm">🤖 AI Health Assistant</span>
+        <span class="font-semibold">🤖 AI Geriatri Assistant</span>
       </div>
       <button onclick="closeChat()" class="text-xl hover:scale-110 transition-transform">✕</button>
     </header>
     
-    <div id="chatBody" class="flex-1 p-3 space-y-2 overflow-y-auto bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
+    <div id="chatBody" class="flex-1 p-4 space-y-3 overflow-y-auto bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900">
       <div class="chat-bot text-white p-3 rounded-2xl rounded-bl-md max-w-xs text-sm">
-        <p>👋 Halo! Saya AI Assistant kesehatan lansia. Ada yang bisa saya bantu?</p>
+        <p>👋 Halo! Saya AI Assistant untuk SIGAP GeriatriCare. Saya dapat membantu informasi tentang screening geriatri, edukasi kesehatan lansia, dan konsultasi umum. Ada yang bisa saya bantu?</p>
       </div>
     </div>
     
-    <footer class="p-3 bg-white/50 dark:bg-gray-800/50">
+    <footer class="p-4 bg-white/50 dark:bg-gray-800/50">
       <div class="flex space-x-2">
-        <input id="chatInput" type="text" placeholder="Ketik pertanyaan..." 
+        <input id="chatInput" type="text" placeholder="Tanyakan tentang kesehatan geriatri..." 
                class="flex-1 p-3 rounded-2xl border dark:bg-gray-700 focus:border-purple-500 transition-colors text-sm"/>
         <button onclick="sendMessage()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-3 rounded-2xl hover:scale-105 transition-transform">
           📤
@@ -252,25 +405,92 @@
   </div>
 </div>
 
+<!-- MODAL: EDUCATION -->
+<div id="educationModal" class="fixed inset-0 bg-black/50 backdrop-blur-md z-50 hidden items-center justify-center p-4 modal">
+  <div class="w-full max-w-4xl h-[80vh] glass rounded-3xl shadow-2xl flex flex-col overflow-hidden">
+    <header class="px-6 py-4 bg-gradient-to-r from-orange-600 to-red-500 text-white flex justify-between items-center">
+      <h3 class="font-bold text-lg">📚 Pusat Edukasi Lansia</h3>
+      <button onclick="closeEducation()" class="text-2xl hover:scale-110 transition-transform">✕</button>
+    </header>
+    
+    <div class="flex-1 p-6 overflow-y-auto">
+      <div id="educationContent">
+        <div class="grid md:grid-cols-2 gap-6 mb-6">
+          <div class="bg-white dark:bg-gray-800 rounded-xl p-4">
+            <h4 class="font-semibold mb-2 text-orange-700 dark:text-orange-300">🎥 Video Edukasi</h4>
+            <div class="space-y-2">
+              <button onclick="playEducationVideo('dm')" class="w-full text-left p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-sm">
+                📹 Manajemen Diabetes Mellitus
+              </button>
+              <button onclick="playEducationVideo('hipertensi')" class="w-full text-left p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-sm">
+                📹 Pola Makan untuk Hipertensi
+              </button>
+              <button onclick="playEducationVideo('jatuh')" class="w-full text-left p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-sm">
+                📹 Pencegahan Jatuh pada Lansia
+              </button>
+              <button onclick="playEducationVideo('jantung')" class="w-full text-left p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-sm">
+                📹 Mengenali Risiko Jantung
+              </button>
+              <button onclick="playEducationVideo('obat')" class="w-full text-left p-2 rounded bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-sm">
+                📹 Tips Jika Lupa Minum Obat
+             </button>
+           </div>
+         </div>
+         
+         <div class="bg-white dark:bg-gray-800 rounded-xl p-4">
+           <h4 class="font-semibold mb-2 text-orange-700 dark:text-orange-300">📅 Jadwal Klub Edukasi</h4>
+           <div class="text-sm space-y-2">
+             <div class="p-2 bg-blue-50 dark:bg-blue-900/20 rounded">
+               <strong>Setiap Jumat, 09:00 WIB</strong><br>
+               📍 Ruang Edukasi Geriatri RSUD Pasar Rebo
+             </div>
+             <div class="p-2 bg-green-50 dark:bg-green-900/20 rounded">
+               <strong>Minggu ini:</strong> Farmasi<br>
+               "Apa yang Harus Dilakukan Jika Lupa Minum Obat?"
+             </div>
+             <div class="p-2 bg-purple-50 dark:bg-purple-900/20 rounded">
+               <strong>Minggu depan:</strong> Rehab Medik<br>
+               "Pencegahan Jatuh dan Risiko Jantung"
+             </div>
+           </div>
+         </div>
+       </div>
+       
+       <div id="videoPlayer" class="hidden bg-black rounded-xl p-4 text-center">
+         <div class="text-white mb-4">
+           <h5 id="videoTitle" class="font-semibold"></h5>
+         </div>
+         <div class="bg-gray-800 rounded-lg p-8 text-white">
+           <div class="text-6xl mb-4">📺</div>
+           <p id="videoDescription"></p>
+           <button onclick="closeVideo()" class="mt-4 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">Tutup Video</button>
+         </div>
+       </div>
+     </div>
+   </div>
+ </div>
+</div>
+
 <!-- FOOTER -->
 <footer class="bg-gradient-to-r from-teal-600 to-emerald-600 text-white py-6">
-  <div class="max-w-6xl mx-auto px-4 text-center">
-    <div class="flex items-center justify-center space-x-2 mb-2">
-      <span class="text-xl">🏥</span>
-      <span class="font-bold">GeriatriCare AI Pro</span>
-    </div>
-    <p class="text-sm text-gray-200">© 2025 RSUD Pasar Rebo – Tim Geriatri Inovatif</p>
-  </div>
+ <div class="max-w-6xl mx-auto px-4 text-center">
+   <div class="flex items-center justify-center space-x-2 mb-2">
+     <span class="text-xl">🏥</span>
+     <span class="font-bold">SIGAP GeriatriCare</span>
+   </div>
+   <p class="text-sm text-gray-200 mb-1">© 2025 RSUD Pasar Rebo – Sistem Informasi Geriatri Terpadu</p>
+   <p class="text-xs text-gray-300">Rawat Jalan • Screening 14 Item • Edukasi Komunitas</p>
+ </div>
 </footer>
 
 <!-- SCRIPTS -->
 <script>
-/* --- Global Variables --- */
+/* === GLOBAL VARIABLES === */
 let fontSize = 16;
 let speechEnabled = true;
-let chartInstance = null;
+let currentUser = null;
 
-/* --- Theme & Font Management --- */
+/* === THEME & SETTINGS === */
 const html = document.documentElement;
 const themeBtn = document.getElementById('themeToggle');
 const speechBtn = document.getElementById('speechToggle');
@@ -278,307 +498,445 @@ const fontInc = document.getElementById('fontIncrease');
 const fontDec = document.getElementById('fontDecrease');
 
 // Theme toggle
-themeBtn.onclick = () => {
-  html.classList.toggle('dark');
-  const isDark = html.classList.contains('dark');
-  themeBtn.innerHTML = isDark ? '☀️' : '🌙';
-  localStorage.setItem('theme', isDark ? 'dark' : 'light');
-};
-
-// Load saved theme
-if (localStorage.getItem('theme') === 'dark') {
-  html.classList.add('dark');
-  themeBtn.innerHTML = '☀️';
+function toggleTheme() {
+ html.classList.toggle('dark');
+ const isDark = html.classList.contains('dark');
+ themeBtn.innerHTML = isDark ? '☀️' : '🌙';
+ localStorage.setItem('theme', isDark ? 'dark' : 'light');
 }
 
-// Font size controls
-fontInc.onclick = () => {
-  if (fontSize < 20) {
-    fontSize += 2;
-    document.body.style.fontSize = fontSize + 'px';
-    localStorage.setItem('fontSize', fontSize);
-  }
-};
+// Font controls
+function increaseFontSize() {
+ if (fontSize < 20) {
+   fontSize += 2;
+   document.body.style.fontSize = fontSize + 'px';
+   localStorage.setItem('fontSize', fontSize);
+ }
+}
 
-fontDec.onclick = () => {
-  if (fontSize > 12) {
-    fontSize -= 2;
-    document.body.style.fontSize = fontSize + 'px';
-    localStorage.setItem('fontSize', fontSize);
-  }
-};
-
-// Load saved font size
-const savedFontSize = localStorage.getItem('fontSize');
-if (savedFontSize) {
-  fontSize = parseInt(savedFontSize);
-  document.body.style.fontSize = fontSize + 'px';
+function decreaseFontSize() {
+ if (fontSize > 12) {
+   fontSize -= 2;
+   document.body.style.fontSize = fontSize + 'px';
+   localStorage.setItem('fontSize', fontSize);
+ }
 }
 
 // Speech toggle
-speechBtn.onclick = () => {
-  speechEnabled = !speechEnabled;
-  speechBtn.innerHTML = speechEnabled ? '🔊' : '🔇';
-};
+function toggleSpeech() {
+ speechEnabled = !speechEnabled;
+ speechBtn.innerHTML = speechEnabled ? '🔊' : '🔇';
+ speechBtn.title = speechEnabled ? 'Matikan Suara' : 'Nyalakan Suara';
+}
 
-/* --- Text-to-Speech Function --- */
+// Event listeners
+themeBtn.addEventListener('click', toggleTheme);
+fontInc.addEventListener('click', increaseFontSize);
+fontDec.addEventListener('click', decreaseFontSize);
+speechBtn.addEventListener('click', toggleSpeech);
+
+// Load saved settings
+if (localStorage.getItem('theme') === 'dark') {
+ html.classList.add('dark');
+ themeBtn.innerHTML = '☀️';
+}
+
+const savedFontSize = localStorage.getItem('fontSize');
+if (savedFontSize) {
+ fontSize = parseInt(savedFontSize);
+ document.body.style.fontSize = fontSize + 'px';
+}
+
+/* === TEXT-TO-SPEECH === */
 function speakText(text) {
-  if (!speechEnabled || !window.speechSynthesis) return;
-  
-  window.speechSynthesis.cancel();
-  const utterance = new SpeechSynthesisUtterance(text);
-  utterance.lang = 'id-ID';
-  utterance.rate = 0.8;
-  utterance.pitch = 1;
-  window.speechSynthesis.speak(utterance);
+ if (!speechEnabled || !window.speechSynthesis) return;
+ 
+ window.speechSynthesis.cancel();
+ const utterance = new SpeechSynthesisUtterance(text);
+ utterance.lang = 'id-ID';
+ utterance.rate = 0.8;
+ utterance.pitch = 1;
+ window.speechSynthesis.speak(utterance);
 }
 
-/* --- Health Scanner --- */
-function scrollToScanner() {
-  document.getElementById('scanner').scrollIntoView({ behavior: 'smooth' });
+/* === MODAL FUNCTIONS === */
+function openScreening() {
+ document.getElementById('screeningModal').classList.remove('hidden');
+ document.getElementById('screeningModal').classList.add('flex');
 }
 
-function runScanner() {
-  const age = parseInt(document.getElementById('age').value);
-  const gender = document.getElementById('gender').value;
-  const condition = document.getElementById('condition').value;
-  const activity = document.getElementById('activity').value;
-  
-  if (!age || !gender || !condition || !activity) {
-    alert('🚨 Mohon lengkapi semua data!');
-    return;
-  }
-  
-  // Calculate risk score
-  let riskScore = 0;
-  
-  // Age factor
-  if (age >= 80) riskScore += 35;
-  else if (age >= 70) riskScore += 25;
-  else if (age >= 60) riskScore += 15;
-  
-  // Gender factor
-  if (gender === 'male' && age > 65) riskScore += 5;
-  
-  // Condition factor
-  const conditionScores = {
-    'multiple': 40, 'heart': 35, 'diabetes': 30, 
-    'hypertension': 25, 'none': 0
-  };
-  riskScore += conditionScores[condition] || 0;
-  
-  // Activity factor
-  const activityScores = { 'low': 20, 'medium': 10, 'high': 0 };
-  riskScore += activityScores[activity] || 0;
-  
-  riskScore = Math.min(riskScore, 100);
-  
-  displayScanResult(riskScore);
+function closeScreening() {
+ document.getElementById('screeningModal').classList.add('hidden');
+ document.getElementById('screeningModal').classList.remove('flex');
 }
-
-function displayScanResult(score) {
-  const resultDiv = document.getElementById('scanResult');
-  
-  // Determine risk level and colors
-  let level, colors, advice;
-  if (score >= 70) {
-    level = 'TINGGI';
-    colors = ['#ef4444', '#fca5a5'];
-    advice = 'Konsultasi dokter segera, monitor vital signs rutin';
-  } else if (score >= 40) {
-    level = 'SEDANG';
-    colors = ['#f97316', '#fed7aa'];
-    advice = 'Kontrol rutin 3 bulan, perbaiki gaya hidup';
-  } else {
-    level = 'RENDAH';
-    colors = ['#22c55e', '#bbf7d0'];
-    advice = 'Pertahankan pola hidup sehat, check-up tahunan';
-  }
-  
-  resultDiv.innerHTML = `
-    <div class="bg-white dark:bg-gray-800 rounded-2xl p-4 shadow-xl">
-      <div class="flex items-center justify-between mb-4">
-        <div class="text-center">
-          <canvas id="riskChart" class="w-24 h-24 mx-auto"></canvas>
-        </div>
-        <div class="flex-1 ml-4">
-          <div class="text-2xl font-bold ${score >= 70 ? 'text-red-500' : score >= 40 ? 'text-orange-500' : 'text-green-500'}">
-            ${score}% 
-          </div>
-          <div class="text-sm font-semibold text-gray-700 dark:text-gray-300">
-            Risiko ${level}
-          </div>
-          <div class="text-xs text-gray-600 dark:text-gray-400 mt-2">
-            ${advice}
-          </div>
-        </div>
-      </div>
-      
-      <div class="text-center">
-        <button onclick="openChat()" class="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full hover:scale-105 transition-transform text-sm">
-          💬 Konsultasi AI
-        </button>
-      </div>
-    </div>
-  `;
-  
-  // Create chart
-  setTimeout(() => {
-    const canvas = document.getElementById('riskChart');
-    if (canvas) {
-      if (chartInstance) chartInstance.destroy();
-      
-      chartInstance = new Chart(canvas, {
-        type: 'doughnut',
-        data: {
-          labels: ['Risiko', 'Sehat'],
-          datasets: [{
-            data: [score, 100 - score],
-            backgroundColor: colors,
-            borderWidth: 0
-          }]
-        },
-        options: {
-          responsive: true,
-          maintainAspectRatio: false,
-          plugins: { legend: { display: false } },
-          cutout: '70%'
-        }
-      });
-    }
-  }, 100);
-  
-  resultDiv.classList.remove('hidden');
-  
-  // Speak result
-  speakText(`Tingkat risiko ${level} sebesar ${score} persen. ${advice}`);
-}
-
-/* --- Chat System --- */
-const chatWidget = document.getElementById('chatWidget');
-const chatBody = document.getElementById('chatBody');
-const chatInput = document.getElementById('chatInput');
 
 function openChat() {
-  chatWidget.classList.remove('hidden');
-  chatWidget.classList.add('flex');
-  chatInput.focus();
+ document.getElementById('chatModal').classList.remove('hidden');
+ document.getElementById('chatModal').classList.add('flex');
+ document.getElementById('chatInput').focus();
 }
 
 function closeChat() {
-  chatWidget.classList.add('hidden');
-  chatWidget.classList.remove('flex');
+ document.getElementById('chatModal').classList.add('hidden');
+ document.getElementById('chatModal').classList.remove('flex');
 }
 
+function openEducation() {
+ document.getElementById('educationModal').classList.remove('hidden');
+ document.getElementById('educationModal').classList.add('flex');
+}
+
+function closeEducation() {
+ document.getElementById('educationModal').classList.add('hidden');
+ document.getElementById('educationModal').classList.remove('flex');
+}
+
+/* === ACCESS FUNCTIONS === */
+function openPatientAccess() {
+ alert('🔐 Akses Pasien\n\nUntuk mengakses Buku Laporan Geriatri Digital, silakan login dengan:\n• Nomor RM\n• Tanggal lahir\n\nFitur: Lihat hasil screening, jadwal kontrol, edukasi personal');
+}
+
+function openFamilyAccess() {
+ alert('📱 Akses Keluarga & FKTP\n\nUntuk mengakses Aplikasi SIGAP Mobile:\n• Download aplikasi SIGAP\n• Registrasi sebagai caregiver/FKTP\n• Verifikasi dengan admin RS\n\nFitur: Monitor pasien, komunikasi dengan tim medis');
+}
+
+function openDoctorAccess() {
+ alert('👨‍⚕️ Akses Dokter RSUD\n\nLogin ERM (Electronic Medical Record):\n• Username: dokter.geriatri\n• Password: [sesuai kebijakan RS]\n\nFitur: Input screening, diagnosis, resep, rujukan internal');
+}
+
+/* === POLI INFO === */
+function openPoliInfo(poli) {
+ const poliData = {
+   jantung: {
+     nama: 'Poli Jantung',
+     dokter: 'Dr. Sp.JP',
+     jadwal: 'Senin-Jumat 08:00-12:00',
+     layanan: 'EKG, Echo, Stress Test',
+     info: 'Khusus lansia dengan keluhan jantung, nyeri dada, sesak napas'
+   },
+   dalam: {
+     nama: 'Poli Penyakit Dalam',
+     dokter: 'Dr. Sp.PD',
+     jadwal: 'Senin-Sabtu 08:00-14:00',
+     layanan: 'Hipertensi, Diabetes, Metabolik',
+     info: 'Penanganan penyakit dalam komprehensif untuk geriatri'
+   },
+   saraf: {
+     nama: 'Poli Saraf',
+     dokter: 'Dr. Sp.S',
+     jadwal: 'Selasa, Kamis 08:00-12:00',
+     layanan: 'Demensia, Stroke, Parkinson',
+     info: 'Evaluasi kognitif dan gangguan neurologis lansia'
+   },
+   ortho: {
+     nama: 'Poli Orthopedi',
+     dokter: 'Dr. Sp.OT',
+     jadwal: 'Senin, Rabu, Jumat 08:00-12:00',
+     layanan: 'Osteoporosis, Arthritis, Fraktur',
+     info: 'Kesehatan tulang dan sendi untuk lansia'
+   },
+   gizi: {
+     nama: 'Poli Gizi',
+     dokter: 'Ahli Gizi Klinik',
+     jadwal: 'Senin-Jumat 08:00-15:00',
+     layanan: 'Konsultasi diet, Malnutrisi',
+     info: 'Penyusunan diet khusus geriatri dan edukasi gizi'
+   },
+   rehab: {
+     nama: 'Poli Rehab Medik',
+     dokter: 'Dr. Sp.KFR',
+     jadwal: 'Senin-Jumat 08:00-16:00',
+     layanan: 'Fisioterapi, Terapi Okupasi',
+     info: 'Rehabilitasi fisik dan pencegahan jatuh'
+   }
+ };
+ 
+ const data = poliData[poli];
+ alert(`🏥 ${data.nama}\n\n👨‍⚕️ ${data.dokter}\n📅 ${data.jadwal}\n🩺 ${data.layanan}\n\nℹ️ ${data.info}\n\nKlik 'Screening Geriatri' untuk evaluasi awal sebelum konsultasi.`);
+}
+
+/* === SCREENING GERIATRI === */
+document.getElementById('screeningForm').addEventListener('submit', function(e) {
+ e.preventDefault();
+ 
+ // Calculate screening score
+ let totalScore = 0;
+ const screeningItems = [
+   'vision', 'hearing', 'balance', 'nutrition', 'incontinence',
+   'depression', 'cognitive', 'polypharmacy', 'adl', 'social',
+   'sleep', 'pain', 'hospitalization', 'support'
+ ];
+ 
+ let checkedItems = 0;
+ screeningItems.forEach(item => {
+   const selected = document.querySelector(`input[name="${item}"]:checked`);
+   if (selected) {
+     checkedItems++;
+     totalScore += parseInt(selected.value);
+   }
+ });
+ 
+ if (checkedItems < 14) {
+   alert('⚠️ Mohon lengkapi semua 14 item screening!');
+   return;
+ }
+ 
+ displayScreeningResult(totalScore);
+});
+
+function displayScreeningResult(score) {
+ let risk, color, recommendations;
+ 
+ if (score >= 8) {
+   risk = 'TINGGI';
+   color = 'text-red-600';
+   recommendations = [
+     'Rujuk ke dokter spesialis geriatri segera',
+     'Evaluasi komprehensif CGA (Comprehensive Geriatric Assessment)',
+     'Koordinasi tim multidisiplin',
+     'Follow up ketat setiap 2 minggu'
+   ];
+ } else if (score >= 5) {
+   risk = 'SEDANG';
+   color = 'text-orange-600';
+   recommendations = [
+     'Konsultasi dokter geriatri dalam 1 minggu',
+     'Screening lanjutan sesuai domain positif',
+     'Edukasi dan intervensi dini',
+     'Follow up setiap bulan'
+   ];
+ } else if (score >= 2) {
+   risk = 'RENDAH';
+   color = 'text-yellow-600';
+   recommendations = [
+     'Monitoring berkala',
+     'Edukasi pencegahan',
+     'Screening ulang 6 bulan',
+     'Pertahankan aktivitas optimal'
+   ];
+ } else {
+   risk = 'MINIMAL';
+   color = 'text-green-600';
+   recommendations = [
+     'Status geriatri baik',
+     'Pertahankan gaya hidup sehat',
+     'Screening tahunan',
+     'Tetap aktif bersosialisasi'
+   ];
+ }
+ 
+ const resultDiv = document.getElementById('screeningResult');
+ resultDiv.innerHTML = `
+   <div class="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
+     <h4 class="text-xl font-bold mb-4 text-center">📊 Hasil Screening Geriatri</h4>
+     
+     <div class="text-center mb-6">
+       <div class="text-4xl font-bold ${color} mb-2">${score}/14</div>
+       <div class="text-lg font-semibold ${color}">Risiko ${risk}</div>
+     </div>
+     
+     <div class="mb-6">
+       <h5 class="font-semibold mb-3">💡 Rekomendasi Tindak Lanjut:</h5>
+       <ul class="space-y-2">
+         ${recommendations.map(rec => `
+           <li class="flex items-start text-sm">
+             <span class="text-green-500 mr-2 mt-0.5">✓</span>
+             ${rec}
+           </li>
+         `).join('')}
+       </ul>
+     </div>
+     
+     <div class="text-center space-x-2">
+       <button onclick="printScreeningResult()" class="bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 text-sm">
+         🖨️ Cetak Hasil
+       </button>
+       <button onclick="openChat()" class="bg-purple-500 text-white px-4 py-2 rounded-lg hover:bg-purple-600 text-sm">
+         💬 Konsultasi AI
+       </button>
+     </div>
+   </div>
+ `;
+ 
+ resultDiv.classList.remove('hidden');
+ 
+ // Speak result
+ speakText(`Hasil screening geriatri menunjukkan skor ${score} dari 14 dengan tingkat risiko ${risk}. ${recommendations[0]}`);
+}
+
+function printScreeningResult() {
+ window.print();
+}
+
+/* === CHAT SYSTEM === */
+const chatBody = document.getElementById('chatBody');
+const chatInput = document.getElementById('chatInput');
+
 function sendMessage() {
-  const message = chatInput.value.trim();
-  if (!message) return;
-  
-  appendMessage('user', message);
-  chatInput.value = '';
-  
-  // Show typing indicator
-  const typingDiv = document.createElement('div');
-  typingDiv.className = 'chat-bot text-white p-3 rounded-2xl rounded-bl-md max-w-xs typing-indicator text-sm';
-  typingDiv.innerHTML = '<p>Mengetik...</p>';
-  chatBody.appendChild(typingDiv);
-  chatBody.scrollTop = chatBody.scrollHeight;
-  
-  // Get AI response
-  setTimeout(() => {
-    typingDiv.remove();
-    const response = getAIResponse(message);
-    appendMessage('bot', response);
-    speakText(response);
-  }, 1500);
+ const message = chatInput.value.trim();
+ if (!message) return;
+ 
+ appendMessage('user', message);
+ chatInput.value = '';
+ 
+ // Show typing indicator
+ const typingDiv = document.createElement('div');
+ typingDiv.className = 'chat-bot text-white p-3 rounded-2xl rounded-bl-md max-w-xs text-sm';
+ typingDiv.innerHTML = '<p>AI sedang memproses...</p>';
+ chatBody.appendChild(typingDiv);
+ chatBody.scrollTop = chatBody.scrollHeight;
+ 
+ // Simulate AI response delay
+ setTimeout(() => {
+   typingDiv.remove();
+   const response = getAIResponse(message);
+   appendMessage('bot', response);
+   speakText(response);
+ }, 1500);
 }
 
 function appendMessage(sender, text) {
-  const messageDiv = document.createElement('div');
-  messageDiv.className = sender === 'user' 
-    ? 'chat-user text-white p-3 rounded-2xl rounded-br-md max-w-xs ml-auto text-sm' 
-    : 'chat-bot text-white p-3 rounded-2xl rounded-bl-md max-w-xs text-sm';
-  
-  const p = document.createElement('p');
-  p.textContent = text;
-  messageDiv.appendChild(p);
-  
-  chatBody.appendChild(messageDiv);
-  chatBody.scrollTop = chatBody.scrollHeight;
+ const messageDiv = document.createElement('div');
+ messageDiv.className = sender === 'user' 
+   ? 'chat-user text-white p-3 rounded-2xl rounded-br-md max-w-xs ml-auto text-sm' 
+   : 'chat-bot text-white p-3 rounded-2xl rounded-bl-md max-w-xs text-sm';
+ 
+ const p = document.createElement('p');
+ p.textContent = text;
+ messageDiv.appendChild(p);
+ 
+ chatBody.appendChild(messageDiv);
+ chatBody.scrollTop = chatBody.scrollHeight;
 }
 
 function getAIResponse(prompt) {
-  const lowerPrompt = prompt.toLowerCase();
-  
-  // Compact health responses
-  if (lowerPrompt.includes('tekanan darah') || lowerPrompt.includes('hipertensi')) {
-    return `🩺 Tips hipertensi: kurangi garam, olahraga ringan 30 menit/hari, kelola stress. Target <140/90 mmHg. Jika >180/110 segera ke IGD.`;
-  }
-  
-  if (lowerPrompt.includes('diabetes') || lowerPrompt.includes('gula darah')) {
-    return `🍎 Diabetes: cek gula rutin, makan teratur porsi kecil, pilih nasi merah, olahraga setelah makan. Target <180 mg/dL. Konsultasi dokter untuk obat.`;
-  }
-  
-  if (lowerPrompt.includes('jantung') || lowerPrompt.includes('kardio')) {
-    return `❤️ Jantung sehat: jalan kaki rutin, diet rendah lemak, tidur cukup, kelola stress. Segera ke RS jika nyeri dada atau sesak berat.`;
-  }
-  
-  if (lowerPrompt.includes('osteoporosis') || lowerPrompt.includes('tulang')) {
-    return `🦴 Tulang kuat: kalsium 1200mg/hari, sinar matahari pagi, olahraga beban ringan, hindari rokok. Screening DEXA rutin.`;
-  }
-  
-  if (lowerPrompt.includes('tidur') || lowerPrompt.includes('insomnia')) {
-    return `😴 Tidur berkualitas: jadwal tetap 21:00-05:00, kamar gelap sejuk, hindari kafein sore, relaksasi sebelum tidur.`;
-  }
-  
-  if (lowerPrompt.includes('nutrisi') || lowerPrompt.includes('makan')) {
-    return `🥗 Nutrisi lansia: 5-6 porsi kecil/hari, protein tinggi, sayur buah, kalsium vitamin D, air putih 8 gelas. Konsultasi ahli gizi.`;
-  }
-  
-  if (lowerPrompt.includes('olahraga') || lowerPrompt.includes('senam')) {
-    return `🤸‍♀️ Olahraga aman: pemanasan 5 menit, jalan 30 menit/hari, senam lansia 3x/minggu, latihan keseimbangan. Hentikan jika pusing.`;
-  }
-  
-  if (lowerPrompt.includes('mental') || lowerPrompt.includes('depresi')) {
-    return `🧠 Kesehatan mental: tetap bersosialisasi, hobi menyenangkan, bergabung komunitas, latihan kognitif, dukungan keluarga.`;
-  }
-  
-  // General responses
-  const responses = [
-    `👋 Halo! Ada keluhan kesehatan yang ingin Anda konsultasikan? Saya siap membantu dengan informasi kesehatan lansia.`,
-    `🏥 Saya dapat membantu informasi tentang hipertensi, diabetes, jantung, nutrisi, olahraga, dan kesehatan mental lansia.`,
-    `💡 Ingat: kontrol rutin, minum obat teratur, pola hidup sehat, tetap aktif. Ada yang spesifik ingin ditanyakan?`
-  ];
-  
-  return responses[Math.floor(Math.random() * responses.length)];
+ const lowerPrompt = prompt.toLowerCase();
+ 
+ // SIGAP specific responses
+ if (lowerPrompt.includes('screening') || lowerPrompt.includes('14 item')) {
+   return `📋 Screening Geriatri 14 item meliputi: gangguan penglihatan, pendengaran, keseimbangan/jatuh, malnutrisi, inkontinensia, depresi, kognitif, polyfarmacy, ADL, isolasi sosial, gangguan tidur, nyeri kronis, riwayat hospitalisasi, dan dukungan sosial. Skor ≥8 = risiko tinggi, perlu rujukan segera.`;
+ }
+ 
+ if (lowerPrompt.includes('sigap') || lowerPrompt.includes('aplikasi')) {
+   return `📱 SIGAP (Sistem Informasi Geriatri Terpadu) memiliki 3 akses: 1) Pasien: Buku Laporan Geriatri Digital, 2) Keluarga/FKTP: Aplikasi SIGAP Mobile, 3) Dokter: ERM RSUD. Semua terintegrasi dengan data Sie Manis untuk identitas dan tanda vital.`;
+ }
+ 
+ if (lowerPrompt.includes('edukasi') || lowerPrompt.includes('klub')) {
+   return `📚 Klub Edukasi Lansia setiap Jumat jam 09:00 di Ruang Edukasi RSUD Pasar Rebo. Format diskusi kelompok dengan media visual. Materi: Farmasi (lupa minum obat), Rehab Medik (cegah jatuh & risiko jantung), Keperawatan (hipertensi & DM). Sifatnya komunitas/club.`;
+ }
+ 
+ if (lowerPrompt.includes('poli') || lowerPrompt.includes('rawat jalan')) {
+   return `🏥 Poli terkait geriatri: Jantung, Penyakit Dalam, Saraf, Orthopedi, Gizi, Rehab Medik. Khusus rawat jalan saja (tidak rawat inap). Sasaran: 60-64 tahun mandiri, >65 tahun dengan bantuan caregiver.`;
+ }
+ 
+ // Health responses
+ if (lowerPrompt.includes('hipertensi') || lowerPrompt.includes('tekanan darah')) {
+   return `🩺 Hipertensi pada lansia: target <140/90 mmHg, diet rendah garam <5g/hari, olahraga ringan 30 menit/hari, kelola stress. Edukasi pola makan tersedia di video keperawatan setiap Jumat.`;
+ }
+ 
+ if (lowerPrompt.includes('diabetes') || lowerPrompt.includes('gula darah')) {
+   return `🍎 Diabetes lansia: target gula <180 mg/dL, makan teratur porsi kecil, pilih karbohidrat kompleks, monitor kaki harian. Video edukasi DM tersedia di klub edukasi.`;
+ }
+ 
+ if (lowerPrompt.includes('jatuh') || lowerPrompt.includes('keseimbangan')) {
+   return `⚠️ Pencegahan jatuh: latihan keseimbangan, perbaiki pencahayaan, hilangkan hambatan di rumah, gunakan alat bantu jika perlu. Edukasi lengkap di Rehab Medik setiap Jumat.`;
+ }
+ 
+ if (lowerPrompt.includes('obat') || lowerPrompt.includes('farmasi')) {
+   return `💊 Tips jika lupa minum obat: 1) Segera minum jika <6 jam, 2) Skip jika >6 jam, lanjut dosis berikutnya, 3) Gunakan kotak obat harian, 4) Set alarm. Konsultasi farmasi setiap Jumat di klub edukasi.`;
+ }
+ 
+ // General responses
+ const responses = [
+   `👋 Halo! Saya AI Assistant SIGAP. Saya dapat membantu informasi tentang screening geriatri 14 item, klub edukasi Jumat, akses aplikasi, dan konsultasi kesehatan lansia. Ada yang ingin ditanyakan?`,
+   
+   `🏥 Di SIGAP, kami melayani: 1) Screening geriatri komprehensif, 2) Edukasi komunitas setiap Jumat, 3) Konsultasi 6 poli geriatri, 4) Integrasi data Sie Manis. Rawat jalan khusus usia 60+ tahun.`,
+   
+   `💡 SIGAP memfokuskan pada: pencegahan, deteksi dini geriatric syndrome, edukasi berkelanjutan, dan dukungan keluarga. Tim multidisiplin siap membantu kesehatan optimal lansia.`
+ ];
+ 
+ return responses[Math.floor(Math.random() * responses.length)];
 }
 
-// Chat input event listeners
+// Chat input events
 chatInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter' && !e.shiftKey) {
-    e.preventDefault();
-    sendMessage();
-  }
+ if (e.key === 'Enter' && !e.shiftKey) {
+   e.preventDefault();
+   sendMessage();
+ }
 });
 
-// Close chat with Escape key
+/* === EDUCATION SYSTEM === */
+function openEducationVideo(type) {
+ // This would integrate with actual video content
+ const videos = {
+   farmasi: 'Video: Tips Mengatasi Lupa Minum Obat',
+   rehab: 'Video: Pencegahan Jatuh dan Risiko Jantung', 
+   keperawatan: 'Video: Hipertensi dan Diabetes'
+ };
+ 
+ alert(`🎥 ${videos[type]}\n\nVideo edukasi akan diputar. Dalam implementasi nyata, ini akan terhubung dengan sistem video streaming RSUD Pasar Rebo.`);
+}
+
+function playEducationVideo(topic) {
+ const videoData = {
+   dm: {
+     title: 'Manajemen Diabetes Mellitus untuk Lansia',
+     description: 'Video edukasi komprehensif tentang pengelolaan diabetes pada lansia, termasuk diet, olahraga, dan monitoring gula darah.'
+   },
+   hipertensi: {
+     title: 'Pola Makan untuk Hipertensi',
+     description: 'Panduan diet DASH untuk lansia dengan hipertensi, tips mengurangi garam, dan menu sehat harian.'
+   },
+   jatuh: {
+     title: 'Pencegahan Jatuh pada Lansia',
+     description: 'Latihan keseimbangan, modifikasi rumah, dan strategi pencegahan jatuh yang efektif untuk lansia.'
+   },
+   jantung: {
+     title: 'Mengenali Risiko Jantung',
+     description: 'Tanda-tanda bahaya penyakit jantung pada lansia dan kapan harus segera ke rumah sakit.'
+   },
+   obat: {
+     title: 'Tips Jika Lupa Minum Obat',
+     description: 'Strategi praktis untuk memastikan kepatuhan minum obat dan apa yang harus dilakukan jika terlewat.'
+   }
+ };
+ 
+ const data = videoData[topic];
+ const videoPlayer = document.getElementById('videoPlayer');
+ const videoTitle = document.getElementById('videoTitle');
+ const videoDescription = document.getElementById('videoDescription');
+ 
+ videoTitle.textContent = data.title;
+ videoDescription.textContent = data.description;
+ videoPlayer.classList.remove('hidden');
+ 
+ speakText(`Memutar video: ${data.title}`);
+}
+
+function closeVideo() {
+ document.getElementById('videoPlayer').classList.add('hidden');
+}
+
+/* === KEYBOARD SHORTCUTS === */
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !chatWidget.classList.contains('hidden') {
-    closeChat();
-  }
+ if (e.key === 'Escape') {
+   closeScreening();
+   closeChat();
+   closeEducation();
+ }
 });
 
-/* --- PWA Installation --- */
+/* === PWA INSTALLATION === */
 let deferredPrompt;
 
 window.addEventListener('beforeinstallprompt', (e) => {
  e.preventDefault();
  deferredPrompt = e;
  
- // Show install button
  const installBtn = document.createElement('button');
  installBtn.className = 'fixed bottom-4 right-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white px-3 py-2 rounded-full shadow-lg hover:scale-105 transition-transform z-40 text-sm';
- installBtn.innerHTML = '📱 Install';
+ installBtn.innerHTML = '📱 Install SIGAP';
  installBtn.onclick = async () => {
    if (deferredPrompt) {
      deferredPrompt.prompt();
@@ -591,19 +949,18 @@ window.addEventListener('beforeinstallprompt', (e) => {
  };
  document.body.appendChild(installBtn);
  
- // Auto-hide after 8 seconds
  setTimeout(() => {
    if (installBtn.parentNode) {
-     installBtn.style.opacity = '0.6';
+     installBtn.style.opacity = '0.7';
    }
- }, 8000);
+ }, 10000);
 });
 
-/* --- Service Worker for Offline Support --- */
+/* === SERVICE WORKER === */
 if ('serviceWorker' in navigator) {
  window.addEventListener('load', () => {
    const swCode = `
-     const CACHE_NAME = 'geriatricare-v2';
+     const CACHE_NAME = 'sigap-geriatricare-v1';
      const urlsToCache = [
        '/',
        'https://cdn.tailwindcss.com',
@@ -622,10 +979,7 @@ if ('serviceWorker' in navigator) {
        event.respondWith(
          caches.match(event.request)
            .then((response) => {
-             if (response) {
-               return response;
-             }
-             return fetch(event.request);
+             return response || fetch(event.request);
            })
        );
      });
@@ -635,62 +989,32 @@ if ('serviceWorker' in navigator) {
    const swUrl = URL.createObjectURL(blob);
    
    navigator.serviceWorker.register(swUrl)
-     .then((registration) => {
-       console.log('SW registered successfully');
-     })
-     .catch((registrationError) => {
-       console.log('SW registration failed');
-     });
+     .then(() => console.log('SIGAP SW registered'))
+     .catch(() => console.log('SIGAP SW registration failed'));
  });
 }
 
-/* --- Initialize App --- */
+/* === INITIALIZATION === */
 document.addEventListener('DOMContentLoaded', () => {
- // Add smooth animations to feature cards
- const observerOptions = {
-   threshold: 0.1,
-   rootMargin: '0px 0px -30px 0px'
- };
+ console.log('🏥 SIGAP GeriatriCare initialized successfully!');
  
- const observer = new IntersectionObserver((entries) => {
-   entries.forEach(entry => {
-     if (entry.isIntersecting) {
-       entry.target.style.opacity = '1';
-       entry.target.style.transform = 'translateY(0)';
-     }
-   });
- }, observerOptions);
- 
- // Observe feature cards
- document.querySelectorAll('.feature-card').forEach(card => {
-   card.style.opacity = '0';
-   card.style.transform = 'translateY(15px)';
-   card.style.transition = 'all 0.5s ease-out';
-   observer.observe(card);
- });
+ // Welcome message
+ setTimeout(() => {
+   if (speechEnabled) {
+     speakText('Selamat datang di SIGAP GeriatriCare RSUD Pasar Rebo. Sistem informasi geriatri terpadu untuk pelayanan kesehatan lansia yang optimal.');
+   }
+ }, 2000);
 });
 
-// Prevent zoom on double tap for better mobile UX
+// Prevent zoom on mobile
 let lastTouchEnd = 0;
 document.addEventListener('touchend', (event) => {
- const now = (new Date()).getTime();
+ const now = Date.now();
  if (now - lastTouchEnd <= 300) {
    event.preventDefault();
  }
  lastTouchEnd = now;
 }, false);
-
-// Track feature usage
-document.addEventListener('click', (e) => {
- if (e.target.matches('[onclick*="openChat"]')) {
-   console.log('Chat opened');
- }
- if (e.target.matches('[onclick*="runScanner"]')) {
-   console.log('Health scan initiated');
- }
-});
-
-console.log('🏥 GeriatriCare AI Pro v2.0 ready!');
 </script>
 
 </body>
